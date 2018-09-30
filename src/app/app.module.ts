@@ -32,6 +32,9 @@ registerLocaleData(localeDE);
 
 import {CdkTableModule} from '@angular/cdk/table';
 import { MonthReportComponent } from './month/month-report/month-report.component';
+import { MonthDaysComponent } from './month/month-days/month-days.component';
+import { MonthLocationsComponent } from './month/month-locations/month-locations.component';
+import { ReportService } from './services/report.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,8 @@ import { MonthReportComponent } from './month/month-report/month-report.componen
     DayDateComponent,
     DistanceEditComponent,
     MonthReportComponent,
+    MonthDaysComponent,
+    MonthLocationsComponent,
   ],
   entryComponents: [
     DistanceEditComponent,
@@ -73,6 +78,7 @@ import { MonthReportComponent } from './month/month-report/month-report.componen
     MapsService,
     StorageService,
     DatePipe,
+    ReportService,
   ],
   bootstrap: [AppComponent]
 })

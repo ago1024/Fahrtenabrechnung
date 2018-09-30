@@ -6,11 +6,11 @@ import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 
 @Component({
-  selector: 'app-month-report',
-  templateUrl: './month-report.component.html',
-  styleUrls: ['./month-report.component.css']
+  selector: 'app-month-days',
+  templateUrl: './month-days.component.html',
+  styleUrls: ['./month-days.component.css']
 })
-export class MonthReportComponent implements OnInit, OnChanges {
+export class MonthDaysComponent implements OnInit, OnChanges {
 
   @Input()
   year: number;
@@ -19,8 +19,6 @@ export class MonthReportComponent implements OnInit, OnChanges {
   month: number;
 
   displayedColumns = ['date', 'steps', 'distance'];
-  locationColumns = ['id', 'name', 'address'];
-  locations: MatTableDataSource<Location>;
   days: MatTableDataSource<Day>;
 
   constructor(public waypointService: WaypointService, public locationService: LocationService, public reportService: ReportService) {
@@ -34,10 +32,10 @@ export class MonthReportComponent implements OnInit, OnChanges {
   update(): void {
     const report = this.reportService.update(this.year, this.month);
     this.days = new MatTableDataSource<Day>(report.days);
-    this.locations = new MatTableDataSource<Location>(report.locations);
   }
 
   ngOnChanges(): void {
     this.update();
   }
+
 }

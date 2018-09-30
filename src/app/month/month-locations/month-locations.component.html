@@ -1,0 +1,24 @@
+<h2>Legende</h2>
+<p>
+	<mat-table [dataSource]="locations">
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef>Schlüssel</mat-header-cell>
+			<mat-cell *matCellDef="let location">{{location.id}}</mat-cell>
+		</ng-container> 
+	
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef>Ort</mat-header-cell>
+			<mat-cell *matCellDef="let location">{{location.name}}</mat-cell>
+		</ng-container> 
+	
+		<ng-container matColumnDef="address">
+			<mat-header-cell *matHeaderCellDef>Adresse</mat-header-cell>
+			<mat-cell *matCellDef="let location">{{location.address}}</mat-cell>
+		</ng-container>
+		
+		<mat-header-row> *matHeaderRowDef="locationColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: locationColumns"></mat-row>	
+	
+	</mat-table>
+</p>
+

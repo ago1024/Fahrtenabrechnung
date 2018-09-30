@@ -1,3 +1,4 @@
+<div class="noprint">
 Monat
 <mat-form-field>
 	<mat-select [(ngModel)]="selectedMonth">
@@ -14,16 +15,19 @@ Jahr
 		</mat-option>
 	</mat-select>
 </mat-form-field>
-
+</div>
 <mat-tab-group>
 	<mat-tab label="Bearbeiten">
 		<app-month-edit *ngIf="selectedMonth >= 0 && selectedYear" [month]="selectedMonth" [year]="selectedYear">
 		</app-month-edit>
 	</mat-tab>
-	<mat-tab label="Bericht">
-		<h1>Monatsbericht</h1>
-		<app-month-report *ngIf="selectedMonth >= 0 && selectedYear" [month]="selectedMonth" [year]="selectedYear">
-		</app-month-report>
+	<mat-tab label="Fahrstrecken">
+		<app-month-days *ngIf="selectedMonth >= 0 && selectedYear" [month]="selectedMonth" [year]="selectedYear">
+		</app-month-days>
+	</mat-tab>
+	<mat-tab label="Legende">
+		<app-month-locations *ngIf="selectedMonth >= 0 && selectedYear" [month]="selectedMonth" [year]="selectedYear">
+		</app-month-locations>
 	</mat-tab>
 </mat-tab-group>
 

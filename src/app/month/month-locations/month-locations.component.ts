@@ -1,16 +1,16 @@
 import {LocationService, Location} from '../../services/location.service';
-import { ReportService, Day } from '../../services/report.service';
+import { ReportService } from '../../services/report.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
 import {DatePipe} from '@angular/common';
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, Input} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 
 @Component({
-  selector: 'app-month-report',
-  templateUrl: './month-report.component.html',
-  styleUrls: ['./month-report.component.css']
+  selector: 'app-month-locations',
+  templateUrl: './month-locations.component.html',
+  styleUrls: ['./month-locations.component.css']
 })
-export class MonthReportComponent implements OnInit, OnChanges {
+export class MonthLocationsComponent implements OnInit, OnChanges {
 
   @Input()
   year: number;
@@ -18,10 +18,8 @@ export class MonthReportComponent implements OnInit, OnChanges {
   @Input()
   month: number;
 
-  displayedColumns = ['date', 'steps', 'distance'];
   locationColumns = ['id', 'name', 'address'];
   locations: MatTableDataSource<Location>;
-  days: MatTableDataSource<Day>;
 
   constructor(public waypointService: WaypointService, public locationService: LocationService, public reportService: ReportService) {
     locationService.locationsChanged.subscribe(event => this.update());
@@ -33,11 +31,11 @@ export class MonthReportComponent implements OnInit, OnChanges {
 
   update(): void {
     const report = this.reportService.update(this.year, this.month);
-    this.days = new MatTableDataSource<Day>(report.days);
     this.locations = new MatTableDataSource<Location>(report.locations);
   }
 
   ngOnChanges(): void {
     this.update();
   }
+
 }
