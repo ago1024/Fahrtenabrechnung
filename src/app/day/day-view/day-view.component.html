@@ -1,0 +1,19 @@
+<p>
+  <span *ngFor="let step of steps; let last = last">
+  	<span>
+  		{{step.from.id}}
+  	</span>
+  	<span *ngIf="step.distance !== undefined">
+  		-
+  	</span>
+  	<span *ngIf="step.distance === undefined">
+  		<button mat-mini-fab (click)="openMaps(step); $event.stopPropagation()" color="warn"></button>
+  	</span>
+  	<span *ngIf="last">
+	  	{{step.to.id}}
+  	</span>
+  </span>
+  <span *ngIf="totalDistance !== undefined">
+  	Gesamt: {{totalDistance}} km
+  </span>
+</p>

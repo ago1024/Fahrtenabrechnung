@@ -1,0 +1,30 @@
+Monat
+<mat-form-field>
+	<mat-select [(ngModel)]="selectedMonth">
+		<mat-option *ngFor="let month of months" [value]="month.value">
+			{{ month.title }}
+		</mat-option>
+	</mat-select>
+</mat-form-field>
+Jahr
+<mat-form-field>
+	<mat-select [(ngModel)]="selectedYear">
+		<mat-option *ngFor="let year of years" [value]="year">
+			{{ year }}
+		</mat-option>
+	</mat-select>
+</mat-form-field>
+
+<mat-tab-group>
+	<mat-tab label="Bearbeiten">
+		<app-month-edit *ngIf="selectedMonth >= 0 && selectedYear" [month]="selectedMonth" [year]="selectedYear">
+		</app-month-edit>
+	</mat-tab>
+	<mat-tab label="Bericht">
+		<h1>Monatsbericht</h1>
+		<app-month-report *ngIf="selectedMonth >= 0 && selectedYear" [month]="selectedMonth" [year]="selectedYear">
+		</app-month-report>
+	</mat-tab>
+</mat-tab-group>
+
+

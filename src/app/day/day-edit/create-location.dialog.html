@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Zielort hinzufügen</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input placeholder="Name" matInput tabindex="1" lang="de" [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field>
+    <input placeholder="Adresse, Ort" matInput tabindex="1" lang="de" [(ngModel)]="data.address">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Abbrechen</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="!data.name || !data.address">Hinzufügen</button>
+</div>

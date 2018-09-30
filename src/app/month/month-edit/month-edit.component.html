@@ -1,0 +1,14 @@
+<mat-accordion>
+	<mat-expansion-panel *ngFor="let day of days" [expanded]="selected === day" (opened)="selected = day" hideToggle="true">
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				<app-day-date [year]="year" [month]="month" [day]="day"></app-day-date>
+			</mat-panel-title>
+			<mat-panel-description>
+				<app-day-view [year]="year" [month]="month" [day]="day"></app-day-view>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+		<app-day-edit [year]="year" [month]="month" [day]="day">
+		</app-day-edit>
+	</mat-expansion-panel>
+</mat-accordion>
