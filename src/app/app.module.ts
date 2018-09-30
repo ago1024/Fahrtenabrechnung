@@ -12,6 +12,7 @@ import {
   MatListModule,
   MatTableModule,
   MatTabsModule,
+  MatSnackBarModule,
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -35,6 +36,9 @@ import { MonthReportComponent } from './month/month-report/month-report.componen
 import { MonthDaysComponent } from './month/month-days/month-days.component';
 import { MonthLocationsComponent } from './month/month-locations/month-locations.component';
 import { ReportService } from './services/report.service';
+import { ExportButtonComponent } from './export-button/export-button.component';
+import { ExportService } from './services/export.service';
+import { ImportComponent } from './import/import.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,8 @@ import { ReportService } from './services/report.service';
     MonthReportComponent,
     MonthDaysComponent,
     MonthLocationsComponent,
+    ExportButtonComponent,
+    ImportComponent,
   ],
   entryComponents: [
     DistanceEditComponent,
@@ -70,6 +76,7 @@ import { ReportService } from './services/report.service';
     MatSelectModule,
     MatExpansionModule,
     MatTabsModule,
+    MatSnackBarModule,
   ],
   providers: [
     IdHelperService,
@@ -79,6 +86,7 @@ import { ReportService } from './services/report.service';
     StorageService,
     DatePipe,
     ReportService,
+    ExportService,
   ],
   bootstrap: [AppComponent]
 })
