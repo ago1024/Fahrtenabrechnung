@@ -3,7 +3,7 @@ import {WaypointService, Step} from '../../services/waypoint.service';
 import {MapsService} from '../../services/maps.service';
 import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
 import {Component, Input, Host, OnInit, OnChanges, SimpleChanges, OnDestroy, Inject} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';

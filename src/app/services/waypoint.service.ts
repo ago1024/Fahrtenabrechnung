@@ -1,8 +1,7 @@
 import {LocationService, Location, DistanceChange} from './location.service';
 import {StorageService} from './storage.service';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
+import {Observable, Subject} from 'rxjs';
 
 export class Step {
   from: Location;
