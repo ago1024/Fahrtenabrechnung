@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ImportComponent implements OnInit {
 
-  @ViewChild('file') file;
+  @ViewChild('file', { static: true }) file;
 
   constructor(private storageService: StorageService, private waypointService: WaypointService,
     private exportService: ExportService, private snackBar: MatSnackBar, private applicationRef: ApplicationRef) { }
