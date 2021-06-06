@@ -2,7 +2,7 @@ import {LocationService, Location} from './location.service';
 import {WaypointService, Step} from './waypoint.service';
 import {DatePipe} from '@angular/common';
 import {Injectable} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface Day {
   day: string;

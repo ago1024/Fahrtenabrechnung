@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener, ApplicationRef } from '@ang
 import { StorageService } from '../services/storage.service';
 import { WaypointService } from '../services/waypoint.service';
 import { ExportService } from '../services/export.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-import',
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ImportComponent implements OnInit {
 
-  @ViewChild('file') file;
+  @ViewChild('file', { static: true }) file;
 
   constructor(private storageService: StorageService, private waypointService: WaypointService,
     private exportService: ExportService, private snackBar: MatSnackBar, private applicationRef: ApplicationRef) { }
