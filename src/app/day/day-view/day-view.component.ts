@@ -5,7 +5,7 @@ import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
 import {Component, Input, Host, OnInit, OnChanges, SimpleChanges, OnDestroy, Inject} from '@angular/core';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
