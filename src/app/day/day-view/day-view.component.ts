@@ -23,6 +23,10 @@ export class DistanceEditComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  get isValid() {
+    return this.data.distance || this.data.distance === 0;
+  }
 }
 
 @Component({
