@@ -38,6 +38,7 @@
     "@types/node": "~6.0.60",
     "angular-ide": "^0.9.38",
     "codelyzer": "^4.0.1",
+    "file-saver": "^2.0.5",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
