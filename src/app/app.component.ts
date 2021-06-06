@@ -1,5 +1,6 @@
 import { WaypointService } from './services/waypoint.service';
 import { Component } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
 
 class Month {
   value: number;
@@ -17,8 +18,8 @@ class Month {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  selectedMonth = 0;
-  selectedYear = new Date().getFullYear();
+  selectedMonth: number;
+  selectedYear: number;
 
   months = [
     new Month(0, 'Januar'),
@@ -34,14 +35,26 @@ export class AppComponent {
     new Month(10, 'November'),
     new Month(11, 'Dezember'),
   ];
-  years = [
-    2017,
-    2018,
-    2019
-  ];
+
+  years = Array.from((function*() {
+    const lastYear = new Date().getFullYear();
+    let year = 2017;
+    while (year <= lastYear)
+      yield year++;
+    })());
 
   constructor(public waypointService: WaypointService) {
     this.waypointService.load();
-  }
 
+    const now = new Date();
+    let monthIndex = now.getMonth() - 1;
+    let year = now.getFullYear();
+
+    if (monthIndex < 0) {
+      monthIndex += 12;
+      year -= 1;
+    }
+    this.selectedMonth = monthIndex;
+    this.selectedYear = year;
+  }
 }
