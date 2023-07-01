@@ -1,6 +1,5 @@
 import { WaypointService } from './services/waypoint.service';
 import { Component } from '@angular/core';
-import { ThrowStmt } from '@angular/compiler';
 
 class Month {
   value: number;
