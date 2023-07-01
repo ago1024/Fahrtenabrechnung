@@ -39,7 +39,7 @@ export class IdHelperService {
     return 0;
   }
 
-  public lastId(ids: IterableIterator<string>, isNumeric: boolean): string {
+  public lastId(ids: Iterable<string>, isNumeric: boolean): string {
     let max: string;
     for (const cur of ids) {
       if (max === undefined) {
@@ -51,7 +51,7 @@ export class IdHelperService {
     return max;
   }
 
-  private nextIdAlpha(ids: IterableIterator<string>): string {
+  private nextIdAlpha(ids: Iterable<string>): string {
     const low = 'a'.charCodeAt(0);
     const high = 'z'.charCodeAt(0);
     const last: string = this.lastId(ids, false);
@@ -77,7 +77,7 @@ export class IdHelperService {
     return result;
   }
 
-  public nextId(ids: IterableIterator<string>, isNumeric: boolean): string {
+  public nextId(ids: Iterable<string>, isNumeric: boolean): string {
     if (!isNumeric) {
       return this.nextIdAlpha(ids);
     }
