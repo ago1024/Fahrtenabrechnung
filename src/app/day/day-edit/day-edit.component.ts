@@ -3,7 +3,7 @@ import {MapsService} from '../../services/maps.service';
 import {WaypointService} from '../../services/waypoint.service';
 import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
 import {Component, Input, Host, OnInit, Inject} from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 
 @Component({
   templateUrl: 'create-location.dialog.html',

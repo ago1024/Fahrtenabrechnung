@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener, ApplicationRef } from '@ang
 import { StorageService } from '../services/storage.service';
 import { WaypointService } from '../services/waypoint.service';
 import { ExportService } from '../services/export.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-import',
