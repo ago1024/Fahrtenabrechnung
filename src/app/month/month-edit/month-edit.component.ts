@@ -1,11 +1,9 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef} from '@angular/core';
 
 @Component({
-  selector: 'app-month-edit',
-  templateUrl: './month-edit.component.html',
-  styleUrls: ['./month-edit.component.css'],
-  entryComponents: [
-  ]
+    selector: 'app-month-edit',
+    templateUrl: './month-edit.component.html',
+    styleUrls: ['./month-edit.component.css']
 })
 export class MonthEditComponent implements OnInit {
 
