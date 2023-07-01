@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { StorageService } from '@app/services/storage.service';
+import { ExportService } from '@app/services/export.service';
 
 import { ExportButtonComponent } from './export-button.component';
 
@@ -8,6 +10,7 @@ describe('ExportButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      providers: [ ExportService, StorageService ],
       declarations: [ ExportButtonComponent ]
     })
     .compileComponents();

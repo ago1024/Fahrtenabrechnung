@@ -1,11 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { StorageService } from '@app/services/storage.service';
 
 import { ExportService } from './export.service';
 
 describe('ExportService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ExportService]
+      providers: [
+        ExportService,
+        StorageService,
+      ]
     });
   });
 

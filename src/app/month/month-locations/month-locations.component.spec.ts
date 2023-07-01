@@ -1,4 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatTableModule } from '@angular/material/table';
+import { IdHelperService } from '@app/services/id-helper.service';
+import { LocationService } from '@app/services/location.service';
+import { ReportService } from '@app/services/report.service';
+import { StorageService } from '@app/services/storage.service';
+import { WaypointService } from '@app/services/waypoint.service';
 
 import { MonthLocationsComponent } from './month-locations.component';
 
@@ -8,7 +14,17 @@ describe('MonthLocationsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthLocationsComponent ]
+      imports: [
+        MatTableModule,
+      ],
+      declarations: [ MonthLocationsComponent ],
+      providers: [
+        WaypointService,
+        LocationService,
+        IdHelperService,
+        StorageService,
+        ReportService,
+      ]
     })
     .compileComponents();
   }));

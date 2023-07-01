@@ -1,8 +1,7 @@
 import {LocationService, Location} from './location.service';
 import {WaypointService, Step} from './waypoint.service';
-import {DatePipe} from '@angular/common';
-import {Injectable} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import {formatDate} from '@angular/common';
+import {Inject, Injectable, LOCALE_ID} from '@angular/core';
 
 export interface Day {
   day: string;
@@ -20,7 +19,7 @@ export interface Report {
 @Injectable()
 export class ReportService {
 
-  constructor(public waypointService: WaypointService, public locationService: LocationService, public datePipe: DatePipe) {
+  constructor(public waypointService: WaypointService, public locationService: LocationService, @Inject(LOCALE_ID) private localeId: string) {
   }
 
   update(year: number, month: number): Report {
@@ -35,7 +34,7 @@ export class ReportService {
         if (current.getTime() >= stop.getTime()) {
           break;
         }
-        const id = this.datePipe.transform(current, 'yyyy-MM-dd');
+        const id = formatDate(current, 'yyyy-MM-dd', this.localeId);
         const waypoints = this.waypointService.getWaypoints(id);
         const steps = this.waypointService.getSteps(id);
         const distance = this.waypointService.getTotalDistance(steps);
