@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { LocationService } from '@app/services/location.service';

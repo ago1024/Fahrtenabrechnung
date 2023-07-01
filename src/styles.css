@@ -3,5 +3,5 @@
 
 @media print {
 	.noprint { display: none; }
-	.mat-tab-header { display: none !important; }
+	.mat-mdc-tab-header { display: none !important; }
 }

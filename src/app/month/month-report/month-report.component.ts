@@ -3,7 +3,7 @@ import { ReportService, Day } from '../../services/report.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
 import {DatePipe} from '@angular/common';
 import {Component, OnInit, Input, OnChanges} from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-month-report',

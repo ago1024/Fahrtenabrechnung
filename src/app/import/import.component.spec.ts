@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ExportService } from '@app/services/export.service';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { LocationService } from '@app/services/location.service';

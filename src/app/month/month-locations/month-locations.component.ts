@@ -3,7 +3,7 @@ import { ReportService } from '../../services/report.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
 import {DatePipe} from '@angular/common';
 import {Component, OnInit, OnChanges, Input} from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-month-locations',
