@@ -1,2 +1,11 @@
-button.mat-mdc-mini-fab { margin-right: 1em }
-mat-form-field { width: 200px }
+button.mat-mdc-mini-fab {
+  margin: 1em;
+}
+
+mat-form-field {
+  width: 400px;
+}
+
+mat-list-item.mdc-list-item.mdc-list-item--with-one-line {
+  height: auto;
+}
