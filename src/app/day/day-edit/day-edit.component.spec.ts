@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +25,6 @@ describe('DayEditComponent', () => {
         MatListModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatIconModule,
       ],
       declarations: [ DayEditComponent ],
       providers: [
