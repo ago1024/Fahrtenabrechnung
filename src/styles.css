@@ -4,4 +4,13 @@
 @media print {
 	.noprint { display: none; }
 	.mat-mdc-tab-header { display: none !important; }
+	.mdc-data-table__cell, .mdc-data-table__header-cell {
+		border: none !important;
+		min-height: 0px !important;
+		height: auto !important;
+		margin: 4px !important;
+	}
+	mat-row, mat-footer-row {
+		min-height: unset !important;
+	}
 }

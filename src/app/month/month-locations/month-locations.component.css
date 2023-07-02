@@ -1,0 +1,9 @@
+.mat-column-id {
+  flex: 0 0 5ch;
+}
+.mat-column-name {
+  flex: 2;
+}
+.mat-column-address {
+  flex: 4;
+}
