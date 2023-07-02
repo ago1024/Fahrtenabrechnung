@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ExportService } from '@app/services/export.service';
 import { IdHelperService } from '@app/services/id-helper.service';
@@ -16,6 +17,7 @@ describe('ImportComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatSnackBarModule,
+        MatIconModule,
       ],
       declarations: [ ImportComponent ],
       providers: [

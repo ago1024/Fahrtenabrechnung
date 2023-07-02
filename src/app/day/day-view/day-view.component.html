@@ -7,7 +7,7 @@
   		-
   	</span>
   	<span *ngIf="step.distance === undefined">
-  		<button mat-mini-fab (click)="openMaps(step); $event.stopPropagation()" color="warn"></button>
+  		<button mat-mini-fab (click)="openMaps(step); $event.stopPropagation()" color="warn" data-testid="edit-distance"></button>
   	</span>
   	<span *ngIf="last">
 	  	{{step.to.id}}

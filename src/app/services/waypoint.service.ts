@@ -9,6 +9,8 @@ export class Step {
   distance: number;
 }
 
+export type WaypointEntries = { locations: Location[], distances: [string, number][], waypoints: [string, string[]][] };
+
 @Injectable()
 export class WaypointService {
 
@@ -109,13 +111,15 @@ export class WaypointService {
     }
   }
 
-  toJSON(): any {
-    const data = this.locationService.toJSON();
-    data.waypoints = Array.from(this._waypoints);
+  toJSON(): WaypointEntries {
+    const data = {
+      ...this.locationService.toJSON(),
+      waypoints: Array.from(this._waypoints),
+    };
     return data;
   }
 
-  fromJSON(data: any) {
+  fromJSON(data: WaypointEntries) {
     this._waypoints.clear();
     this.locationService.fromJSON(data);
     if (data && data.waypoints.forEach) {

@@ -1,0 +1,1 @@
+﻿{"locations":[{"id":"1","name":"Waypoint 1","address":"Zwickauer Straße 16, Chemnitz"},{"id":"2","name":"Waypoint 2","address":"Augustusburger Str. 265, Chemnitz"}],"distances":[["1:2",10.5],["2:1",12]],"waypoints":[["2022-05-01",["1","2","1"]]],"Fahrtenaberechnung_Version":"v20180930"}

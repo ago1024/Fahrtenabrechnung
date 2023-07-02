@@ -16,4 +16,12 @@ describe('ExportService', () => {
   it('should be created', inject([ExportService], (service: ExportService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should export an empty storage', inject([ExportService], async (service: ExportService) => {
+    const expected = {"locations":[],"distances":[],"waypoints":[],"Fahrtenaberechnung_Version":"v20180930"};
+    const blob = service.toBlob();
+    expect(blob).toBeTruthy();
+    expect(await blob.text()).toEqual(JSON.stringify(expected));
+  }));
+
 });

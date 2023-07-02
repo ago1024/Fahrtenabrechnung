@@ -7,7 +7,9 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "e2e": "playwright test",
+    "e2e:debug": "playwright test --project chromium --headed"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@angular/cli": "^15.2.9",
     "@angular/compiler-cli": "^15.2.9",
     "@angular/language-service": "^15.2.9",
+    "@playwright/test": "^1.35.1",
     "@types/jasmine": "^3.7.7",
     "@types/jasminewd2": "^2.0.9",
     "@types/node": "^12.11.1",

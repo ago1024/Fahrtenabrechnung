@@ -18,8 +18,6 @@ export interface Location {
    * full address
    */
   address: string;
-
-  toJSON(): any;
 }
 
 interface DistanceReset {
@@ -60,13 +58,6 @@ class LocationImpl implements Location {
     this._address = address;
   }
 
-  toJSON(): any {
-    return {
-      id: this.id,
-      name: this.name,
-      address: this.address
-    };
-  }
 }
 
 export class DistanceChange {
@@ -75,6 +66,8 @@ export class DistanceChange {
   to: Location;
   distance: number;
 }
+
+export type LocationEntries = { locations: Location[], distances: [string, number][] };
 
 /**
  * Service to track locations and distances between locations
@@ -167,14 +160,14 @@ export class LocationService implements DistanceReset {
     this.distanceChangedEmitter.next(distanceChange);
   }
 
-  toJSON(): any {
+  toJSON(): LocationEntries {
     return {
-      locations: Array.from(this.locations).map(e => e.toJSON()),
+      locations: Array.from(this.locations).map(({ id, name, address}) => ({id, name, address})),
       distances: Array.from(this._distances)
     };
   }
 
-  fromJSON(data: any) {
+  fromJSON(data: LocationEntries) {
     this._locations.clear();
     this._distances.clear();
     if (data) {

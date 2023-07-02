@@ -1,13 +1,13 @@
 <p>
 	<mat-list>
 		<mat-list-item *ngFor="let w of waypointService.getWaypoints(id); let index = index">
-			<button mat-mini-fab (click)="waypointService.deleteWaypoint(id, index)">-</button>
+			<button mat-mini-fab (click)="waypointService.deleteWaypoint(id, index)" data-testid="remove-waypoint" >-</button>
 			<span>
 				{{w.id}} - {{w.name}}, {{w.address}}
 			</span>
 		</mat-list-item>
 		<mat-list-item>
-			<button mat-mini-fab (click)="createLocation()">+</button>
+			<button mat-mini-fab (click)="createLocation()" data-testid="add-location" >+</button>
 			<mat-form-field>
 				<mat-select #box placeholder="Zielort auswählen" (selectionChange)="waypointService.addWaypoint(id, box.value); box.value = undefined">
 					<mat-option *ngFor="let location of locations" [value]="location">
