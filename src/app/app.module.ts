@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
@@ -71,6 +72,7 @@ import { ImportComponent } from './import/import.component';
         MatExpansionModule,
         MatTabsModule,
         MatSnackBarModule,
+        MatIconModule,
     ],
     providers: [
         IdHelperService,
