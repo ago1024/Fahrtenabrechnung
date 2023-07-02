@@ -2,7 +2,7 @@
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 @media print {
-	.noprint { display: none; }
+	.noprint { display: none !important; }
 	.mat-mdc-tab-header { display: none !important; }
 	.mdc-data-table__cell, .mdc-data-table__header-cell {
 		border: none !important;

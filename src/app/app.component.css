@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  row-gap: 10px;
+}
+
+.button-row, .form-field-row {
+  display: flex;
+  flex: row;
+  gap: 10px;
+}

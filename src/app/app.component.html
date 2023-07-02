@@ -1,22 +1,24 @@
-<div class="noprint">
-Monat
-<mat-form-field>
-	<mat-select [(ngModel)]="selectedMonth">
-		<mat-option *ngFor="let month of months" [value]="month.value">
-			{{ month.title }}
-		</mat-option>
-	</mat-select>
-</mat-form-field>
-Jahr
-<mat-form-field>
-	<mat-select [(ngModel)]="selectedYear">
-		<mat-option *ngFor="let year of years" [value]="year">
-			{{ year }}
-		</mat-option>
-	</mat-select>
-</mat-form-field>
-<app-export-button></app-export-button>
-<app-import></app-import>
+<div class="button-row noprint">
+	<app-export-button class="cell"></app-export-button>
+	<app-import class="cell"></app-import>
+</div>
+<div class="form-field-row noprint">
+	<mat-form-field>
+		<mat-label>Monat</mat-label>
+		<mat-select [(ngModel)]="selectedMonth" name="month">
+			<mat-option *ngFor="let month of months" [value]="month.value">
+				{{ month.title }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Jahr</mat-label>
+		<mat-select [(ngModel)]="selectedYear" name="year">
+			<mat-option *ngFor="let year of years" [value]="year">
+				{{ year }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
 </div>
 <mat-tab-group>
 	<mat-tab label="Bearbeiten">
