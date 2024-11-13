@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ExportService } from '../services/export.service';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -11,8 +11,8 @@ import { MatIcon } from '@angular/material/icon';
   imports: [MatButton, MatIcon]
 })
 export class ExportButtonComponent implements OnInit {
+  private exportService = inject(ExportService);
 
-  constructor(private exportService: ExportService) { }
 
   ngOnInit() {
   }

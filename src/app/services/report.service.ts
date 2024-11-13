@@ -1,7 +1,7 @@
 import {LocationService, Location} from './location.service';
 import {WaypointService, Step} from './waypoint.service';
 import {formatDate} from '@angular/common';
-import {Inject, Injectable, LOCALE_ID} from '@angular/core';
+import { Injectable, LOCALE_ID, inject } from '@angular/core';
 
 export interface Day {
   day: string;
@@ -18,9 +18,10 @@ export interface Report {
 
 @Injectable()
 export class ReportService {
+  waypointService = inject(WaypointService);
+  locationService = inject(LocationService);
+  private localeId = inject(LOCALE_ID);
 
-  constructor(public waypointService: WaypointService, public locationService: LocationService, @Inject(LOCALE_ID) private localeId: string) {
-  }
 
   update(year: number, month: number): Report {
     const locations = new Map<string, Location>();

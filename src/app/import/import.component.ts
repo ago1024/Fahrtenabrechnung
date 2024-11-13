@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener, ApplicationRef } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ApplicationRef, inject } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { WaypointService } from '../services/waypoint.service';
 import { ExportService } from '../services/export.service';
@@ -14,11 +14,14 @@ import { MatIcon } from '@angular/material/icon';
   imports: [MatButton, MatIcon]
 })
 export class ImportComponent implements OnInit {
+  private storageService = inject(StorageService);
+  private waypointService = inject(WaypointService);
+  private exportService = inject(ExportService);
+  private snackBar = inject(MatSnackBar);
+  private applicationRef = inject(ApplicationRef);
+
 
   @ViewChild('file', { static: true }) file;
-
-  constructor(private storageService: StorageService, private waypointService: WaypointService,
-    private exportService: ExportService, private snackBar: MatSnackBar, private applicationRef: ApplicationRef) { }
 
   ngOnInit() {
   }

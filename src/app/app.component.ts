@@ -1,5 +1,5 @@
 import { WaypointService } from './services/waypoint.service';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ExportButtonComponent } from './export-button/export-button.component';
 import { ImportComponent } from './import/import.component';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -45,6 +45,8 @@ class Month {
     ]
 })
 export class AppComponent {
+  waypointService = inject(WaypointService);
+
   selectedMonth: number;
   selectedYear: number;
 
@@ -70,7 +72,7 @@ export class AppComponent {
       yield year++;
     })());
 
-  constructor(public waypointService: WaypointService) {
+  constructor() {
     this.waypointService.load();
 
     const now = new Date();

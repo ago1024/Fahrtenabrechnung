@@ -1,6 +1,6 @@
 import {LocationService, Location, DistanceChange} from './location.service';
 import {StorageService} from './storage.service';
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
 export class Step {
@@ -13,13 +13,16 @@ export type WaypointEntries = { locations: Location[], distances: [string, numbe
 
 @Injectable()
 export class WaypointService {
+  private locationService = inject(LocationService);
+  private storage = inject(StorageService);
+
 
   public changed: Observable<string>;
   private emitter: Subject<string>;
 
   private _waypoints: Map<string, string[]> = new Map();
 
-  constructor(private locationService: LocationService, private storage: StorageService) {
+  constructor() {
     this.emitter = this.changed = new Subject();
 
     this.locationService.locationsChanged.subscribe(e => this.save());

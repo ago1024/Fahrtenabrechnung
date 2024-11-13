@@ -2,7 +2,7 @@ import {LocationService, Location} from '../../services/location.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
 import {MapsService} from '../../services/maps.service';
 import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
-import {Component, Input, Host, OnInit, OnChanges, SimpleChanges, OnDestroy, Inject} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, OnDestroy, inject } from '@angular/core';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle, MatDialogContent, MatDialogClose, MatDialogActions } from '@angular/material/dialog';
@@ -21,11 +21,16 @@ import { MatInput } from '@angular/material/input';
   imports: [MatDialogTitle, CdkScrollable, MatDialogContent, MatFormField, FormsModule, MatInput, MatSuffix, MatButton, MatDialogClose, MatDialogActions]
 })
 export class DistanceEditComponent implements OnInit {
+  dialogRef = inject<MatDialogRef<DistanceEditComponent>>(MatDialogRef);
+  data = inject(MAT_DIALOG_DATA);
+
 
   url: SafeResourceUrl;
 
-  constructor(public dialogRef: MatDialogRef<DistanceEditComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    sanitizer: DomSanitizer) {
+  constructor() {
+    const data = this.data;
+    const sanitizer = inject(DomSanitizer);
+
     this.url = sanitizer.bypassSecurityTrustResourceUrl(data.url);
   }
 
@@ -49,6 +54,12 @@ export class DistanceEditComponent implements OnInit {
     ],
 })
 export class DayViewComponent implements OnChanges, OnDestroy {
+  private parent = inject(MonthEditComponent, { host: true });
+  locationService = inject(LocationService);
+  waypointService = inject(WaypointService);
+  mapsService = inject(MapsService);
+  dialog = inject(MatDialog);
+
   @Input()
   year: number;
 
@@ -68,8 +79,7 @@ export class DayViewComponent implements OnChanges, OnDestroy {
 
   private ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor( @Host() private parent: MonthEditComponent, public locationService: LocationService, public waypointService: WaypointService,
-    public mapsService: MapsService, public dialog: MatDialog) {
+  constructor() {
 
     this.waypointService.changed
       .pipe(takeUntil(this.ngUnsubscribe))

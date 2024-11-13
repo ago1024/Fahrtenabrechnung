@@ -2,7 +2,7 @@ import {LocationService, Location} from '../../services/location.service';
 import { ReportService, Day } from '../../services/report.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, inject } from '@angular/core';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 @Component({
@@ -13,6 +13,10 @@ import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeader
   imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, NgIf, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
 export class MonthDaysComponent implements OnInit, OnChanges {
+  waypointService = inject(WaypointService);
+  locationService = inject(LocationService);
+  reportService = inject(ReportService);
+
 
   @Input()
   year: number;
@@ -23,7 +27,10 @@ export class MonthDaysComponent implements OnInit, OnChanges {
   displayedColumns = ['date', 'steps', 'distance'];
   days: MatTableDataSource<Day>;
 
-  constructor(public waypointService: WaypointService, public locationService: LocationService, public reportService: ReportService) {
+  constructor() {
+    const waypointService = this.waypointService;
+    const locationService = this.locationService;
+
     locationService.locationsChanged.subscribe(event => this.update());
     waypointService.changed.subscribe(event => this.update());
   }

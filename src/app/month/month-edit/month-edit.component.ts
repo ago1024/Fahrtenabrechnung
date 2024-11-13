@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, inject } from '@angular/core';
 import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
 import { NgFor } from '@angular/common';
 import { DayDateComponent } from '../../day/day-date/day-date.component';
@@ -13,6 +13,8 @@ import { DayEditComponent } from '../../day/day-edit/day-edit.component';
   imports: [MatAccordion, NgFor, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, DayDateComponent, MatExpansionPanelDescription, DayViewComponent, DayEditComponent]
 })
 export class MonthEditComponent implements OnInit {
+  cd = inject(ChangeDetectorRef);
+
 
   private _year: number;
   private _month: number;
@@ -68,8 +70,6 @@ export class MonthEditComponent implements OnInit {
     }
     this._days = days;
   }
-
-  constructor(public cd: ChangeDetectorRef) {}
 
   pad(val: number): string {
     let result = '' + val;

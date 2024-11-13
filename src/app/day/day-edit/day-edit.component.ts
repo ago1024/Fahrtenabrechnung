@@ -1,4 +1,4 @@
-import { Component, Host, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
 import { Location, LocationService } from '../../services/location.service';
@@ -23,6 +23,12 @@ import { MatOption } from '@angular/material/core';
   imports: [MatList, NgFor, MatListItem, MatMiniFabButton, MatIcon, MatIconButton, MatFormField, MatSelect, MatOption]
 })
 export class DayEditComponent implements OnInit {
+  private parent = inject(MonthEditComponent, { host: true });
+  locationService = inject(LocationService);
+  waypointService = inject(WaypointService);
+  mapsService = inject(MapsService);
+  dialog = inject(MatDialog);
+
 
   @Input()
   year: number;
@@ -39,8 +45,7 @@ export class DayEditComponent implements OnInit {
     return this.parent.makeId(this.day);
   }
 
-  constructor( @Host() private parent: MonthEditComponent, public locationService: LocationService, public waypointService: WaypointService,
-    public mapsService: MapsService, public dialog: MatDialog) {
+  constructor() {
     this.locationService.locationsChanged.subscribe(v => this.updateLocations());
   }
 

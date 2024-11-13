@@ -1,5 +1,5 @@
 import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
-import {Component, Input, Host, OnInit, OnChanges} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -10,6 +10,8 @@ import { DatePipe } from '@angular/common';
   imports: [DatePipe]
 })
 export class DayDateComponent {
+  private parent = inject(MonthEditComponent, { host: true });
+
   @Input()
   year: number;
 
@@ -25,9 +27,6 @@ export class DayDateComponent {
 
   get date(): Date {
     return new Date(this.year, this.month, this.day);
-  }
-
-  constructor( @Host() private parent: MonthEditComponent) {
   }
 
 }
