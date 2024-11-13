@@ -7,12 +7,12 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialog
 import { MatFormField, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
+import { Location, LocationService } from '@app/services/location.service';
+import { MapsService } from '@app/services/maps.service';
+import { Step, WaypointService } from '@app/services/waypoint.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
-import { Location, LocationService } from '../../services/location.service';
-import { MapsService } from '../../services/maps.service';
-import { Step, WaypointService } from '../../services/waypoint.service';
 
 @Component({
   templateUrl: 'distance-edit.component.html',

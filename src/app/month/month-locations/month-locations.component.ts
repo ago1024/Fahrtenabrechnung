@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, inject } from '@angular/core';
 import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatRow, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
-import { Location, LocationService } from '../../services/location.service';
-import { ReportService } from '../../services/report.service';
-import { WaypointService } from '../../services/waypoint.service';
+import { Location, LocationService } from '@app/services/location.service';
+import { ReportService } from '@app/services/report.service';
+import { WaypointService } from '@app/services/waypoint.service';
 
 @Component({
   selector: 'app-month-locations',

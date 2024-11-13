@@ -1,18 +1,18 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
-import { Location, LocationService } from '../../services/location.service';
-import { MapsService } from '../../services/maps.service';
-import { WaypointService } from '../../services/waypoint.service';
-import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
-import { CreateLocationDialogComponent, CreateLocationDialogResult } from './create-location.dialog';
-import { MatList, MatListItem } from '@angular/material/list';
 import { NgFor } from '@angular/common';
-import { MatMiniFabButton, MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatFormField } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { MatIconButton, MatMiniFabButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatSelect } from '@angular/material/select';
+import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
+import { Location, LocationService } from '@app/services/location.service';
+import { MapsService } from '@app/services/maps.service';
+import { WaypointService } from '@app/services/waypoint.service';
+import { CreateLocationDialogComponent, CreateLocationDialogResult } from './create-location.dialog';
+import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
 
 @Component({
   selector: 'app-day-edit',

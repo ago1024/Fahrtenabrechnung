@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/materia
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Location } from '../../services/location.service';
+import { Location } from '@app/services/location.service';
 
 export type EditLocationDialogData = Omit<Location, 'id'>;
 export type EditLocationDialogResult = Omit<Location, 'id'> & { resetDistances: boolean };

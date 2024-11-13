@@ -1,9 +1,9 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
 import { MatAccordion, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
-import { DayDateComponent } from '../../day/day-date/day-date.component';
-import { DayEditComponent } from '../../day/day-edit/day-edit.component';
-import { DayViewComponent } from '../../day/day-view/day-view.component';
+import { DayDateComponent } from '@app/day/day-date/day-date.component';
+import { DayEditComponent } from '@app/day/day-edit/day-edit.component';
+import { DayViewComponent } from '@app/day/day-view/day-view.component';
 
 @Component({
   selector: 'app-month-edit',

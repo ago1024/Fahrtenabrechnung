@@ -1,6 +1,6 @@
-import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
-import { Component, Input, OnInit, OnChanges, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
+import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
 
 @Component({
   selector: 'app-day-date',
