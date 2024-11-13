@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, inject } from '@angular/core';
-import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
 import { NgFor } from '@angular/common';
+import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
 import { DayDateComponent } from '../../day/day-date/day-date.component';
-import { DayViewComponent } from '../../day/day-view/day-view.component';
 import { DayEditComponent } from '../../day/day-edit/day-edit.component';
+import { DayViewComponent } from '../../day/day-view/day-view.component';
 
 @Component({
   selector: 'app-month-edit',
@@ -12,7 +12,7 @@ import { DayEditComponent } from '../../day/day-edit/day-edit.component';
   standalone: true,
   imports: [MatAccordion, NgFor, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, DayDateComponent, MatExpansionPanelDescription, DayViewComponent, DayEditComponent]
 })
-export class MonthEditComponent implements OnInit {
+export class MonthEditComponent {
   cd = inject(ChangeDetectorRef);
 
 
@@ -81,9 +81,6 @@ export class MonthEditComponent implements OnInit {
 
   public makeId(day: number): string {
     return this.year + '-' + this.pad(this.month + 1) + '-' + this.pad(day);
-  }
-
-  ngOnInit() {
   }
 
 }

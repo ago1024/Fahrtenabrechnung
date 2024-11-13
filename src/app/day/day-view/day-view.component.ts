@@ -1,18 +1,18 @@
-import {LocationService, Location} from '../../services/location.service';
-import {WaypointService, Step} from '../../services/waypoint.service';
-import {MapsService} from '../../services/maps.service';
-import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
-import { Component, Input, OnInit, OnChanges, SimpleChanges, OnDestroy, inject } from '@angular/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle, MatDialogContent, MatDialogClose, MatDialogActions } from '@angular/material/dialog';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import { NgFor, NgIf } from '@angular/common';
-import { MatMiniFabButton, MatButton } from '@angular/material/button';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { MatFormField, MatSuffix } from '@angular/material/form-field';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButton, MatMiniFabButton } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatFormField, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
+import { Location, LocationService } from '../../services/location.service';
+import { MapsService } from '../../services/maps.service';
+import { Step, WaypointService } from '../../services/waypoint.service';
 
 @Component({
   templateUrl: 'distance-edit.component.html',
@@ -20,7 +20,7 @@ import { MatInput } from '@angular/material/input';
   standalone: true,
   imports: [MatDialogTitle, CdkScrollable, MatDialogContent, MatFormField, FormsModule, MatInput, MatSuffix, MatButton, MatDialogClose, MatDialogActions]
 })
-export class DistanceEditComponent implements OnInit {
+export class DistanceEditComponent {
   dialogRef = inject<MatDialogRef<DistanceEditComponent>>(MatDialogRef);
   data = inject(MAT_DIALOG_DATA);
 
@@ -32,9 +32,6 @@ export class DistanceEditComponent implements OnInit {
     const sanitizer = inject(DomSanitizer);
 
     this.url = sanitizer.bypassSecurityTrustResourceUrl(data.url);
-  }
-
-  ngOnInit() {
   }
 
   get isValid() {

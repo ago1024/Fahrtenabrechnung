@@ -1,9 +1,9 @@
-import {LocationService, Location} from '../../services/location.service';
-import { ReportService, Day } from '../../services/report.service';
-import {WaypointService, Step} from '../../services/waypoint.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, Input, OnChanges, inject } from '@angular/core';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { Component, Input, OnChanges, inject } from '@angular/core';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatRow, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { LocationService } from '../../services/location.service';
+import { Day, ReportService } from '../../services/report.service';
+import { WaypointService } from '../../services/waypoint.service';
 
 @Component({
   selector: 'app-month-days',
@@ -12,7 +12,7 @@ import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeader
   standalone: true,
   imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, NgIf, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
-export class MonthDaysComponent implements OnInit, OnChanges {
+export class MonthDaysComponent implements OnChanges {
   waypointService = inject(WaypointService);
   locationService = inject(LocationService);
   reportService = inject(ReportService);
@@ -33,9 +33,6 @@ export class MonthDaysComponent implements OnInit, OnChanges {
 
     locationService.locationsChanged.subscribe(event => this.update());
     waypointService.changed.subscribe(event => this.update());
-  }
-
-  ngOnInit() {
   }
 
   update(): void {

@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, HostListener, ApplicationRef, inject } from '@angular/core';
-import { StorageService } from '../services/storage.service';
-import { WaypointService } from '../services/waypoint.service';
-import { ExportService } from '../services/export.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApplicationRef, Component, HostListener, ViewChild, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ExportService } from '../services/export.service';
+import { StorageService } from '../services/storage.service';
+import { WaypointService } from '../services/waypoint.service';
 
 @Component({
   selector: 'app-import',
@@ -13,7 +13,7 @@ import { MatIcon } from '@angular/material/icon';
   standalone: true,
   imports: [MatButton, MatIcon]
 })
-export class ImportComponent implements OnInit {
+export class ImportComponent {
   private storageService = inject(StorageService);
   private waypointService = inject(WaypointService);
   private exportService = inject(ExportService);
@@ -22,9 +22,6 @@ export class ImportComponent implements OnInit {
 
 
   @ViewChild('file', { static: true }) file;
-
-  ngOnInit() {
-  }
 
   @HostListener('drag', ['$event']) ondrag(e: Event) {
     e.preventDefault();
