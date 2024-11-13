@@ -70,9 +70,9 @@ export class ImportComponent {
   }
 
   private message(message: string) {
-      this.snackBar.open(message, undefined, {
-        duration: 3000
-      });
+    this.snackBar.open(message, undefined, {
+      duration: 3000
+    });
   }
 
   private import(files: File[]) {

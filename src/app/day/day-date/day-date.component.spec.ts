@@ -14,14 +14,14 @@ describe('DayDateComponent', () => {
     TestBed.configureTestingModule({
       imports: [DayDateComponent],
     })
-    .overrideComponent(DayDateComponent, {
-      add: {
-        providers: [
-          MonthEditComponent,
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(DayDateComponent, {
+        add: {
+          providers: [
+            MonthEditComponent,
+          ]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

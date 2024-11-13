@@ -23,6 +23,7 @@
       ],
       "rules": {
         "@stylistic/js/quotes": [ "error", "single" ],
+        "@stylistic/js/indent": [ "error", 2 ],
         "@angular-eslint/no-empty-lifecycle-method": [
           "warn"
         ],

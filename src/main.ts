@@ -22,16 +22,16 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        importProvidersFrom(BrowserModule),
-        IdHelperService,
-        LocationService,
-        WaypointService,
-        MapsService,
-        StorageService,
-        ReportService,
-        ExportService,
-        provideAnimations()
-    ]
+  providers: [
+    importProvidersFrom(BrowserModule),
+    IdHelperService,
+    LocationService,
+    WaypointService,
+    MapsService,
+    StorageService,
+    ReportService,
+    ExportService,
+    provideAnimations()
+  ]
 })
   .catch(err => console.log(err));

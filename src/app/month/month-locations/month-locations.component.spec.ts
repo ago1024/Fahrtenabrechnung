@@ -26,7 +26,7 @@ describe('MonthLocationsComponent', () => {
         ReportService,
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

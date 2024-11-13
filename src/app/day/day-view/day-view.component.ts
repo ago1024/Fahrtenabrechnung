@@ -40,15 +40,15 @@ export class DistanceEditComponent {
 }
 
 @Component({
-    selector: 'app-day-view',
-    templateUrl: './day-view.component.html',
-    styleUrls: ['./day-view.component.css'],
-    standalone: true,
-    imports: [
-        NgFor,
-        NgIf,
-        MatMiniFabButton,
-    ],
+  selector: 'app-day-view',
+  templateUrl: './day-view.component.html',
+  styleUrls: ['./day-view.component.css'],
+  standalone: true,
+  imports: [
+    NgFor,
+    NgIf,
+    MatMiniFabButton,
+  ],
 })
 export class DayViewComponent implements OnChanges, OnDestroy {
   private parent = inject(MonthEditComponent, { host: true });

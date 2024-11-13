@@ -123,7 +123,7 @@ export class LocationService implements DistanceReset {
   editLocation(id: string, name: string, address: string): Location {
     const location = this._locations.get(id);
     if (!location) {
-        return;
+      return;
     }
 
     location.name = name;

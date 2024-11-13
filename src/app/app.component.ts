@@ -23,26 +23,26 @@ class Month {
 }
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    standalone: true,
-    imports: [
-      FormsModule,
-      NgFor,
-      NgIf,
-      MatFormField,
-      MatLabel,
-      MatSelect,
-      MatOption,
-      MatTabGroup,
-      MatTab,
-      ExportButtonComponent,
-      ImportComponent,
-      MonthEditComponent,
-      MonthDaysComponent,
-      MonthLocationsComponent,
-    ]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgFor,
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatTabGroup,
+    MatTab,
+    ExportButtonComponent,
+    ImportComponent,
+    MonthEditComponent,
+    MonthDaysComponent,
+    MonthLocationsComponent,
+  ]
 })
 export class AppComponent {
   waypointService = inject(WaypointService);
@@ -70,7 +70,7 @@ export class AppComponent {
     let year = 2017;
     while (year <= lastYear)
       yield year++;
-    })());
+  })());
 
   constructor() {
     this.waypointService.load();

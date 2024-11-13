@@ -35,14 +35,14 @@ describe('DayEditComponent', () => {
         MapsService,
       ]
     })
-    .overrideComponent(DayEditComponent, {
-      add: {
-        providers: [
-          MonthEditComponent,
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(DayEditComponent, {
+        add: {
+          providers: [
+            MonthEditComponent,
+          ]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

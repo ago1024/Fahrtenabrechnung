@@ -28,7 +28,7 @@ describe('ImportComponent', () => {
         ExportService,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

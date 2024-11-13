@@ -14,7 +14,7 @@ describe('MonthEditComponent', () => {
         MonthEditComponent,
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

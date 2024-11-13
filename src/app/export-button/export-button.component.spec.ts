@@ -14,7 +14,7 @@ describe('ExportButtonComponent', () => {
       imports: [MatIconModule, ExportButtonComponent],
       providers: [ExportService, StorageService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
