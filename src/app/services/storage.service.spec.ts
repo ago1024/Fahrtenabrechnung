@@ -14,7 +14,7 @@ describe('StorageService', () => {
   }));
 
   it('should provide an initial state', inject([StorageService], (service: StorageService) => {
-    const expected = { "locations": [], "distances": [], "waypoints": [] };
+    const expected = { 'locations': [], 'distances': [], 'waypoints': [] };
     expect(service.data).toEqual(expected);
   }));
 

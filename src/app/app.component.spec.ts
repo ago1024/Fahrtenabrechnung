@@ -16,7 +16,7 @@ describe('AppComponent', () => {
         LocationService,
         IdHelperService,
         ExportService,
-        { provide: StorageService, useValue: { data: { "locations": [], "distances": [], "waypoints": [] } } },
+        { provide: StorageService, useValue: { data: { 'locations': [], 'distances': [], 'waypoints': [] } } },
       ],
     }).compileComponents();
   }));

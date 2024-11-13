@@ -7,7 +7,7 @@ export class StorageService {
   private key = 'app.Fahrtenabrechnung';
 
   get data(): WaypointEntries {
-    return JSON.parse(localStorage.getItem(this.key)) ?? { "locations": [], "distances": [], "waypoints": [] };
+    return JSON.parse(localStorage.getItem(this.key)) ?? { 'locations': [], 'distances': [], 'waypoints': [] };
   }
 
   set data(data: WaypointEntries) {
