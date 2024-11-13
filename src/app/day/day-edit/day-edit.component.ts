@@ -1,25 +1,11 @@
 import { Component, Host, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
 import { Location, LocationService } from '../../services/location.service';
 import { MapsService } from '../../services/maps.service';
 import { WaypointService } from '../../services/waypoint.service';
 import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
-
-@Component({
-  templateUrl: 'create-location.dialog.html',
-  styleUrls: ['create-location.dialog.css']
-})
-export class CreateLocationComponent implements OnInit {
-
-  data: Partial<Omit<Location, 'id'>> = {};
-
-  constructor(public dialogRef: MatDialogRef<CreateLocationComponent>) {
-  }
-
-  ngOnInit() {
-  }
-}
+import { CreateLocationDialogComponent, CreateLocationDialogResult } from './create-location.dialog';
 
 @Component({
   selector: 'app-day-edit',
@@ -58,7 +44,7 @@ export class DayEditComponent implements OnInit {
   }
 
   createLocation() {
-    const dialogRef = this.dialog.open(CreateLocationComponent, {
+    const dialogRef = this.dialog.open<CreateLocationDialogComponent, never, CreateLocationDialogResult>(CreateLocationDialogComponent, {
       width: '400px'
     });
     dialogRef.afterClosed().subscribe(data => {

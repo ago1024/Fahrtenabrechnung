@@ -17,7 +17,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {MonthEditComponent} from './month/month-edit/month-edit.component';
-import {DayEditComponent, CreateLocationComponent} from './day/day-edit/day-edit.component';
+import {DayEditComponent} from './day/day-edit/day-edit.component';
 import {IdHelperService} from './services/id-helper.service';
 import {LocationService} from './services/location.service';
 import {DayViewComponent, DistanceEditComponent} from './day/day-view/day-view.component';
@@ -43,7 +43,6 @@ import { ImportComponent } from './import/import.component';
     declarations: [
         AppComponent,
         MonthEditComponent,
-        CreateLocationComponent,
         DayEditComponent,
         DayViewComponent,
         DayDateComponent,

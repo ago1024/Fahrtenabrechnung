@@ -1,13 +1,15 @@
 <h1 mat-dialog-title>Zielort hinzufügen</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <input placeholder="Name" matInput tabindex="1" lang="de" [(ngModel)]="data.name" name="name">
-  </mat-form-field>
-  <mat-form-field>
-    <input placeholder="Adresse, Ort" matInput tabindex="1" lang="de" [(ngModel)]="data.address" name="address">
-  </mat-form-field>
+  <form [formGroup]="form" #formGroup>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name" lang="de" name="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Adresse, Ort" lang="de" name="address">
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="dialogRef.close()">Abbrechen</button>
-  <button mat-button [mat-dialog-close]="data" [disabled]="!data.name || !data.address">Hinzufügen</button>
+  <button mat-button [mat-dialog-close]="form.value" [disabled]="!form.valid || form.pristine" data-testid="submit">Hinzufügen</button>
 </div>

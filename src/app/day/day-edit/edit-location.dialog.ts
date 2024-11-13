@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -15,7 +15,6 @@ export type EditLocationDialogResult = Omit<Location, 'id'> & { resetDistances: 
   styleUrls: ['edit-location.dialog.css'],
   standalone: true,
   imports: [
-    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
