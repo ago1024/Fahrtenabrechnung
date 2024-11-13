@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
@@ -110,7 +110,7 @@ export class DayViewComponent implements OnChanges, OnDestroy {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.update(this.id);
   }
 

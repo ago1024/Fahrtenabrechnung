@@ -85,7 +85,7 @@ export class ImportComponent {
     fileReader.readAsText(files[0]);
   }
 
-  private importData(data: any) {
+  private importData(data: unknown) {
     if (!this.exportService.isValid(data)) {
       console.log('invalid', data);
       this.message('Daten sind ungültig');

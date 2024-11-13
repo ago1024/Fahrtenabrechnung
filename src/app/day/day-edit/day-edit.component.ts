@@ -46,7 +46,7 @@ export class DayEditComponent implements OnInit {
   }
 
   constructor() {
-    this.locationService.locationsChanged.subscribe(v => this.updateLocations());
+    this.locationService.locationsChanged.subscribe(() => this.updateLocations());
   }
 
   updateLocations() {

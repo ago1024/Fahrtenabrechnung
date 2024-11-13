@@ -31,8 +31,8 @@ export class MonthDaysComponent implements OnChanges {
     const waypointService = this.waypointService;
     const locationService = this.locationService;
 
-    locationService.locationsChanged.subscribe(event => this.update());
-    waypointService.changed.subscribe(event => this.update());
+    locationService.locationsChanged.subscribe(() => this.update());
+    waypointService.changed.subscribe(() => this.update());
   }
 
   update(): void {

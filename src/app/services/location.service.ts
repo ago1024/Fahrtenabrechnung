@@ -85,8 +85,8 @@ export class LocationService implements DistanceReset {
   public locationChanged: Observable<Location>;
   private locationChangedEmitter: Subject<Location>;
 
-  public locationsChanged: Observable<any>;
-  private locationsChangedEmitter: Subject<any>;
+  public locationsChanged: Observable<void>;
+  private locationsChangedEmitter: Subject<void>;
 
   public distanceChanged: Observable<DistanceChange>;
   private distanceChangedEmitter: Subject<DistanceChange>;

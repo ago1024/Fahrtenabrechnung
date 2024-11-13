@@ -25,7 +25,7 @@ export class WaypointService {
   constructor() {
     this.emitter = this.changed = new Subject();
 
-    this.locationService.locationsChanged.subscribe(e => this.save());
+    this.locationService.locationsChanged.subscribe(() => this.save());
     this.locationService.locationChanged.subscribe(location => this.onLocationChange(location));
     this.locationService.distanceChanged.subscribe(change => this.onDistanceChange(change));
   }

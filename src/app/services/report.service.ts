@@ -28,7 +28,6 @@ export class ReportService {
 
     const days = new Array<Day>();
     if (year && month >= 0) {
-      const first = new Date(year, month, 1);
       const stop = new Date(year, month + 1, 1);
       for (let i = 1; i <= 31; i++) {
         const current = new Date(year, month, i);

@@ -29,7 +29,7 @@ export class ExportService {
     importSaveAs(blob, filename);
   }
 
-  public isValid(data: WaypointEntries): boolean {
-    return data[this.VERIFY_KEY] === this.VERIFY_DATA;
+  public isValid(data: unknown): data is WaypointEntries {
+    return typeof data === 'object' && data[this.VERIFY_KEY] === this.VERIFY_DATA;
   }
 }

@@ -19,7 +19,7 @@ export class MonthEditComponent {
   private _year: number;
   private _month: number;
 
-  private _days: any[];
+  private _days: number[];
 
   private _selected = 1;
 
@@ -43,7 +43,7 @@ export class MonthEditComponent {
     return this._month;
   }
 
-  get days(): any[] {
+  get days(): number[] {
     return this._days;
   }
 
@@ -56,9 +56,8 @@ export class MonthEditComponent {
   }
 
   updateDays() {
-    const days = [];
+    const days: number[] = [];
     if (this._year && this._month >= 0) {
-      const first = new Date(this._year, this._month, 1);
       const stop = new Date(this._year, this._month + 1, 1);
       for (let i = 1; i <= 31; i++) {
         const current = new Date(this._year, this._month, i);
