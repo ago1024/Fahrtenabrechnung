@@ -17,8 +17,8 @@ describe('DayViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatDialogModule,
+        DayViewComponent,
       ],
-      declarations: [DayViewComponent],
       providers: [
         LocationService,
         IdHelperService,

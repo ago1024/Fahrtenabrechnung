@@ -1,9 +1,16 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef} from '@angular/core';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
+import { NgFor } from '@angular/common';
+import { DayDateComponent } from '../../day/day-date/day-date.component';
+import { DayViewComponent } from '../../day/day-view/day-view.component';
+import { DayEditComponent } from '../../day/day-edit/day-edit.component';
 
 @Component({
-    selector: 'app-month-edit',
-    templateUrl: './month-edit.component.html',
-    styleUrls: ['./month-edit.component.css']
+  selector: 'app-month-edit',
+  templateUrl: './month-edit.component.html',
+  styleUrls: ['./month-edit.component.css'],
+  standalone: true,
+  imports: [MatAccordion, NgFor, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, DayDateComponent, MatExpansionPanelDescription, DayViewComponent, DayEditComponent]
 })
 export class MonthEditComponent implements OnInit {
 

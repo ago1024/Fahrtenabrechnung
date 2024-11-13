@@ -11,9 +11,8 @@ describe('ExportButtonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ MatIconModule ],
-      providers: [ ExportService, StorageService ],
-      declarations: [ ExportButtonComponent ]
+      imports: [MatIconModule, ExportButtonComponent],
+      providers: [ExportService, StorageService]
     })
     .compileComponents();
   }));

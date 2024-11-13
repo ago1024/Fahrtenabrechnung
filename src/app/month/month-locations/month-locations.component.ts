@@ -3,12 +3,14 @@ import { ReportService } from '../../services/report.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
 import {DatePipe} from '@angular/common';
 import {Component, OnInit, OnChanges, Input} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 @Component({
   selector: 'app-month-locations',
   templateUrl: './month-locations.component.html',
-  styleUrls: ['./month-locations.component.css']
+  styleUrls: ['./month-locations.component.css'],
+  standalone: true,
+  imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRow, MatRowDef, MatRow]
 })
 export class MonthLocationsComponent implements OnInit, OnChanges {
 

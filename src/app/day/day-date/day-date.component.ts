@@ -1,10 +1,13 @@
 import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
 import {Component, Input, Host, OnInit, OnChanges} from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-day-date',
   templateUrl: './day-date.component.html',
-  styleUrls: ['./day-date.component.css']
+  styleUrls: ['./day-date.component.css'],
+  standalone: true,
+  imports: [DatePipe]
 })
 export class DayDateComponent {
   @Input()

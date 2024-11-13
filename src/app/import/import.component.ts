@@ -3,11 +3,15 @@ import { StorageService } from '../services/storage.service';
 import { WaypointService } from '../services/waypoint.service';
 import { ExportService } from '../services/export.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-import',
   templateUrl: './import.component.html',
-  styleUrls: ['./import.component.css']
+  styleUrls: ['./import.component.css'],
+  standalone: true,
+  imports: [MatButton, MatIcon]
 })
 export class ImportComponent implements OnInit {
 

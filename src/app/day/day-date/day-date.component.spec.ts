@@ -9,7 +9,7 @@ describe('DayDateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DayDateComponent ]
+      imports: [DayDateComponent]
     })
     .overrideComponent(DayDateComponent, {
       add: {

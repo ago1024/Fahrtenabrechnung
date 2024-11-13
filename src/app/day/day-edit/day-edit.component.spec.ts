@@ -25,8 +25,8 @@ describe('DayEditComponent', () => {
         MatListModule,
         MatFormFieldModule,
         MatSelectModule,
+        DayEditComponent,
       ],
-      declarations: [ DayEditComponent ],
       providers: [
         LocationService,
         IdHelperService,

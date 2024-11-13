@@ -6,12 +6,21 @@ import { MapsService } from '../../services/maps.service';
 import { WaypointService } from '../../services/waypoint.service';
 import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
 import { CreateLocationDialogComponent, CreateLocationDialogResult } from './create-location.dialog';
+import { MatList, MatListItem } from '@angular/material/list';
+import { NgFor } from '@angular/common';
+import { MatMiniFabButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-day-edit',
   templateUrl: './day-edit.component.html',
   styleUrls: ['./day-edit.component.css'],
-  providers: []
+  providers: [],
+  standalone: true,
+  imports: [MatList, NgFor, MatListItem, MatMiniFabButton, MatIcon, MatIconButton, MatFormField, MatSelect, MatOption]
 })
 export class DayEditComponent implements OnInit {
 

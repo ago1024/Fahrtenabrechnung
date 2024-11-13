@@ -40,19 +40,7 @@ import { ExportService } from './services/export.service';
 import { ImportComponent } from './import/import.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MonthEditComponent,
-        DayEditComponent,
-        DayViewComponent,
-        DayDateComponent,
-        DistanceEditComponent,
-        MonthReportComponent,
-        MonthDaysComponent,
-        MonthLocationsComponent,
-        ExportButtonComponent,
-        ImportComponent,
-    ],
+    declarations: [AppComponent],
     exports: [
         CdkTableModule,
     ],
@@ -72,6 +60,16 @@ import { ImportComponent } from './import/import.component';
         MatTabsModule,
         MatSnackBarModule,
         MatIconModule,
+        MonthEditComponent,
+        DayEditComponent,
+        DayViewComponent,
+        DayDateComponent,
+        DistanceEditComponent,
+        MonthReportComponent,
+        MonthDaysComponent,
+        MonthLocationsComponent,
+        ExportButtonComponent,
+        ImportComponent,
     ],
     providers: [
         IdHelperService,

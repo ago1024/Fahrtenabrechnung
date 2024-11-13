@@ -1,14 +1,16 @@
 import {LocationService, Location} from '../../services/location.service';
 import { ReportService, Day } from '../../services/report.service';
 import {WaypointService, Step} from '../../services/waypoint.service';
-import {DatePipe} from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import {Component, OnInit, Input, OnChanges} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 @Component({
   selector: 'app-month-days',
   templateUrl: './month-days.component.html',
-  styleUrls: ['./month-days.component.css']
+  styleUrls: ['./month-days.component.css'],
+  standalone: true,
+  imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, NgIf, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
 export class MonthDaysComponent implements OnInit, OnChanges {
 

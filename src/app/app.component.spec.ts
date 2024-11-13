@@ -7,9 +7,7 @@ describe('AppComponent', () => {
       imports: [
         AppModule,
       ],
-      declarations: [
-        AppComponent,
-      ],
+      declarations: [AppComponent],
     }).compileComponents();
   }));
   it('should create the app', waitForAsync(() => {
