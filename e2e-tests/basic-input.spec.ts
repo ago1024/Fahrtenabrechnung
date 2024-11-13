@@ -16,6 +16,21 @@ async function addWaypoint(page: Page, options: { name: string, address: string,
   await dialog.getByRole('button', { name: 'Hinzufügen' }).click();
 }
 
+async function editWaypoint(page: Page, options: { name: string, address: string, button?: Locator }) {
+  const button = options.button ?? page.getByTestId('edit-location').nth(0);
+  await button.click();
+
+  const dialog = page.locator('mat-dialog-container');
+  const name = dialog.locator('input[name="name"]');
+  const address = dialog.locator('input[name="address"]');
+
+  await expect(dialog).toContainText('Ort ändern');
+
+  await name.fill(options.name);
+  await address.fill(options.address);
+
+  await dialog.getByTestId('submit').click();
+}
 
 async function enterDistance(page: Page, options: { distance: number, button?: Locator }) {
 
@@ -61,6 +76,30 @@ test('add new location', async ({ page }) => {
   await enterDistance(page, { distance: 12, button: dayView.getByTestId('edit-distance').first() });
 
   await expect(dayView).toContainText('Gesamt: 22.5 km');
+
+});
+
+test('edit location', async ({page}) => {
+
+  await page.click('mat-select[name="month"]');
+  await page.click('//mat-option[contains(.,"Mai")]');
+
+  await page.click('mat-select[name="year"]');
+  await page.click('//mat-option[contains(.,"2022")]');
+
+  const dayView = page.locator('app-day-view').nth(0);
+  const dayEdit = page.locator('app-day-edit').nth(0);
+
+  await addWaypoint(page, { name: 'Waypoint 3', address: 'Bahnhofstraße 1, Chemnitz', button: dayEdit.getByTestId('add-location') });
+  await expect(dayEdit.locator('mat-list-item').nth(0)).toContainText('Waypoint 3');
+
+  await dayEdit.getByPlaceholder('Zielort auswählen').click();
+  await page.click('//mat-option[contains(.,"Waypoint 3")]');
+  await expect(dayEdit.locator('mat-list-item').nth(1)).toContainText('Waypoint 3');
+
+  await editWaypoint(page, { name: 'Waypoint 3 Neu', address: 'Brückenstraße 1, Chemnitz', button: dayEdit.getByTestId('edit-location').nth(0) });
+  await expect(dayEdit.locator('mat-list-item').nth(0)).toContainText('Waypoint 3 Neu');
+  await expect(dayEdit.locator('mat-list-item').nth(1)).toContainText('Waypoint 3 Neu');
 
 });
 

@@ -48,7 +48,6 @@ class LocationImpl implements Location {
 
   set address(address: string) {
     this._address = address;
-    this._service.resetDistances(this);
   }
 
   constructor(service: DistanceReset, id: string, name: string, address: string) {
@@ -112,6 +111,21 @@ export class LocationService implements DistanceReset {
     const id = this.idhelper.nextId(this._locations.keys(), true);
     const location = new LocationImpl(this, id, name, address);
     this._locations.set(id, location);
+
+    this.locationChangedEmitter.next(location);
+    this.locationsChangedEmitter.next(undefined);
+
+    return location;
+  }
+
+  editLocation(id: string, name: string, address: string): Location {
+    const location = this._locations.get(id);
+    if (!location) {
+        return;
+    }
+
+    location.name = name;
+    location.address = address;
 
     this.locationChangedEmitter.next(location);
     this.locationsChangedEmitter.next(undefined);

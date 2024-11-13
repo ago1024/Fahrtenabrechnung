@@ -1,9 +1,10 @@
-import {LocationService, Location} from '../../services/location.service';
-import {MapsService} from '../../services/maps.service';
-import {WaypointService} from '../../services/waypoint.service';
-import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
-import {Component, Input, Host, OnInit, Inject} from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Host, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
+import { Location, LocationService } from '../../services/location.service';
+import { MapsService } from '../../services/maps.service';
+import { WaypointService } from '../../services/waypoint.service';
+import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
 
 @Component({
   templateUrl: 'create-location.dialog.html',
@@ -11,7 +12,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class CreateLocationComponent implements OnInit {
 
-  data: any = {};
+  data: Partial<Omit<Location, 'id'>> = {};
 
   constructor(public dialogRef: MatDialogRef<CreateLocationComponent>) {
   }
@@ -63,6 +64,19 @@ export class DayEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
       const location = this.locationService.createLocation(data.name, data.address);
       this.waypointService.addWaypoint(this.id, location);
+    });
+  }
+
+  editLocation({id, name, address}: Location) {
+    const dialogRef = this.dialog.open<EditLocationDialogComponent, Partial<EditLocationDialogData>, EditLocationDialogResult>(EditLocationDialogComponent, {
+      width: '400px',
+      data: { name, address },
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      const location = this.locationService.editLocation(id, data.name, data.address);
+      if (data.resetDistances) {
+        this.locationService.resetDistances(location);
+      }
     });
   }
 
