@@ -9,3 +9,8 @@ mat-form-field {
 mat-list-item.mdc-list-item.mdc-list-item--with-one-line {
   height: auto;
 }
+
+mat-list-item ::ng-deep .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  align-items: center;
+}
