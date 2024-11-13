@@ -52,7 +52,7 @@ export class DayViewComponent implements OnChanges, OnDestroy {
   steps: Step[];
   totalDistance: number;
 
-  private ngUnsubscribe: Subject<any> = new Subject();
+  private ngUnsubscribe: Subject<void> = new Subject();
 
   constructor( @Host() private parent: MonthEditComponent, public locationService: LocationService, public waypointService: WaypointService,
     public mapsService: MapsService, public dialog: MatDialog) {

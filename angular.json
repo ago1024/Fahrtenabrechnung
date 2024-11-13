@@ -59,18 +59,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "fahrtenabrechnung:build"
+            "buildTarget": "fahrtenabrechnung:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "fahrtenabrechnung:build:production"
+              "buildTarget": "fahrtenabrechnung:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fahrtenabrechnung:build"
+            "buildTarget": "fahrtenabrechnung:build"
           }
         },
         "test": {
