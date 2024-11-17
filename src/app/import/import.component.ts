@@ -1,23 +1,27 @@
-import { Component, OnInit, ViewChild, HostListener, ApplicationRef } from '@angular/core';
+import { ApplicationRef, Component, HostListener, ViewChild, inject } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ExportService } from '../services/export.service';
 import { StorageService } from '../services/storage.service';
 import { WaypointService } from '../services/waypoint.service';
-import { ExportService } from '../services/export.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-import',
   templateUrl: './import.component.html',
-  styleUrls: ['./import.component.css']
+  styleUrls: ['./import.component.css'],
+  standalone: true,
+  imports: [MatButton, MatIcon]
 })
-export class ImportComponent implements OnInit {
+export class ImportComponent {
+  private storageService = inject(StorageService);
+  private waypointService = inject(WaypointService);
+  private exportService = inject(ExportService);
+  private snackBar = inject(MatSnackBar);
+  private applicationRef = inject(ApplicationRef);
+
 
   @ViewChild('file', { static: true }) file;
-
-  constructor(private storageService: StorageService, private waypointService: WaypointService,
-    private exportService: ExportService, private snackBar: MatSnackBar, private applicationRef: ApplicationRef) { }
-
-  ngOnInit() {
-  }
 
   @HostListener('drag', ['$event']) ondrag(e: Event) {
     e.preventDefault();
@@ -66,9 +70,9 @@ export class ImportComponent implements OnInit {
   }
 
   private message(message: string) {
-      this.snackBar.open(message, undefined, {
-        duration: 3000
-      });
+    this.snackBar.open(message, undefined, {
+      duration: 3000
+    });
   }
 
   private import(files: File[]) {
@@ -81,7 +85,7 @@ export class ImportComponent implements OnInit {
     fileReader.readAsText(files[0]);
   }
 
-  private importData(data: any) {
+  private importData(data: unknown) {
     if (!this.exportService.isValid(data)) {
       console.log('invalid', data);
       this.message('Daten sind ungültig');

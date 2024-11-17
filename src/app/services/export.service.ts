@@ -1,4 +1,4 @@
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { Injectable, LOCALE_ID, inject } from '@angular/core';
 import { saveAs as importSaveAs } from 'file-saver';
 import { StorageService } from './storage.service';
 import { WaypointEntries } from './waypoint.service';
@@ -6,11 +6,12 @@ import { formatDate } from '@angular/common';
 
 @Injectable()
 export class ExportService {
+  private storageService = inject(StorageService);
+  private localeId = inject(LOCALE_ID);
+
 
   private VERIFY_KEY = 'Fahrtenaberechnung_Version';
   private VERIFY_DATA = 'v20180930';
-
-  constructor(private storageService: StorageService, @Inject(LOCALE_ID) private localeId: string) { }
 
   public toBlob(): Blob {
     const data = {
@@ -28,7 +29,7 @@ export class ExportService {
     importSaveAs(blob, filename);
   }
 
-  public isValid(data: WaypointEntries): boolean {
-    return data[this.VERIFY_KEY] === this.VERIFY_DATA;
+  public isValid(data: unknown): data is WaypointEntries {
+    return typeof data === 'object' && data[this.VERIFY_KEY] === this.VERIFY_DATA;
   }
 }

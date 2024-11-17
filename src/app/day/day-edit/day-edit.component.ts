@@ -1,33 +1,34 @@
-import { Component, Host, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MonthEditComponent } from '../../month/month-edit/month-edit.component';
-import { Location, LocationService } from '../../services/location.service';
-import { MapsService } from '../../services/maps.service';
-import { WaypointService } from '../../services/waypoint.service';
+import { NgFor } from '@angular/common';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { MatOption } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatSelect } from '@angular/material/select';
+import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
+import { Location, LocationService } from '@app/services/location.service';
+import { MapsService } from '@app/services/maps.service';
+import { WaypointService } from '@app/services/waypoint.service';
+import { CreateLocationDialogComponent, CreateLocationDialogResult } from './create-location.dialog';
 import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
-
-@Component({
-  templateUrl: 'create-location.dialog.html',
-  styleUrls: ['create-location.dialog.css']
-})
-export class CreateLocationComponent implements OnInit {
-
-  data: Partial<Omit<Location, 'id'>> = {};
-
-  constructor(public dialogRef: MatDialogRef<CreateLocationComponent>) {
-  }
-
-  ngOnInit() {
-  }
-}
 
 @Component({
   selector: 'app-day-edit',
   templateUrl: './day-edit.component.html',
   styleUrls: ['./day-edit.component.css'],
-  providers: []
+  providers: [],
+  standalone: true,
+  imports: [MatList, NgFor, MatListItem, MatMiniFabButton, MatIcon, MatIconButton, MatFormField, MatSelect, MatOption]
 })
 export class DayEditComponent implements OnInit {
+  private parent = inject(MonthEditComponent, { host: true });
+  locationService = inject(LocationService);
+  waypointService = inject(WaypointService);
+  mapsService = inject(MapsService);
+  dialog = inject(MatDialog);
+
 
   @Input()
   year: number;
@@ -44,9 +45,8 @@ export class DayEditComponent implements OnInit {
     return this.parent.makeId(this.day);
   }
 
-  constructor( @Host() private parent: MonthEditComponent, public locationService: LocationService, public waypointService: WaypointService,
-    public mapsService: MapsService, public dialog: MatDialog) {
-    this.locationService.locationsChanged.subscribe(v => this.updateLocations());
+  constructor() {
+    this.locationService.locationsChanged.subscribe(() => this.updateLocations());
   }
 
   updateLocations() {
@@ -58,7 +58,7 @@ export class DayEditComponent implements OnInit {
   }
 
   createLocation() {
-    const dialogRef = this.dialog.open(CreateLocationComponent, {
+    const dialogRef = this.dialog.open<CreateLocationDialogComponent, never, CreateLocationDialogResult>(CreateLocationDialogComponent, {
       width: '400px'
     });
     dialogRef.afterClosed().subscribe(data => {

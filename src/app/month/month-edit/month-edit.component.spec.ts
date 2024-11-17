@@ -11,10 +11,10 @@ describe('MonthEditComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatExpansionModule,
-      ],
-      declarations: [ MonthEditComponent ]
+        MonthEditComponent,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

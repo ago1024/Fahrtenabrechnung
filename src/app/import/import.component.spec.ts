@@ -18,8 +18,8 @@ describe('ImportComponent', () => {
       imports: [
         MatSnackBarModule,
         MatIconModule,
+        ImportComponent,
       ],
-      declarations: [ ImportComponent ],
       providers: [
         StorageService,
         WaypointService,
@@ -28,7 +28,7 @@ describe('ImportComponent', () => {
         ExportService,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

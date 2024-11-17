@@ -1,5 +1,16 @@
 import { WaypointService } from './services/waypoint.service';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ExportButtonComponent } from './export-button/export-button.component';
+import { ImportComponent } from './import/import.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
+import { MatOption } from '@angular/material/core';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MonthEditComponent } from './month/month-edit/month-edit.component';
+import { MonthDaysComponent } from './month/month-days/month-days.component';
+import { MonthLocationsComponent } from './month/month-locations/month-locations.component';
 
 class Month {
   value: number;
@@ -14,9 +25,28 @@ class Month {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgFor,
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatTabGroup,
+    MatTab,
+    ExportButtonComponent,
+    ImportComponent,
+    MonthEditComponent,
+    MonthDaysComponent,
+    MonthLocationsComponent,
+  ]
 })
 export class AppComponent {
+  waypointService = inject(WaypointService);
+
   selectedMonth: number;
   selectedYear: number;
 
@@ -40,9 +70,9 @@ export class AppComponent {
     let year = 2017;
     while (year <= lastYear)
       yield year++;
-    })());
+  })());
 
-  constructor(public waypointService: WaypointService) {
+  constructor() {
     this.waypointService.load();
 
     const now = new Date();

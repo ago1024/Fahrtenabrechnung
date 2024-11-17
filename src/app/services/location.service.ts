@@ -1,5 +1,5 @@
 import {IdHelperService} from './id-helper.service';
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
 /**
@@ -73,6 +73,8 @@ export type LocationEntries = { locations: Location[], distances: [string, numbe
  */
 @Injectable()
 export class LocationService implements DistanceReset {
+  idhelper = inject(IdHelperService);
+
   /**
    * locations
    */
@@ -83,8 +85,8 @@ export class LocationService implements DistanceReset {
   public locationChanged: Observable<Location>;
   private locationChangedEmitter: Subject<Location>;
 
-  public locationsChanged: Observable<any>;
-  private locationsChangedEmitter: Subject<any>;
+  public locationsChanged: Observable<void>;
+  private locationsChangedEmitter: Subject<void>;
 
   public distanceChanged: Observable<DistanceChange>;
   private distanceChangedEmitter: Subject<DistanceChange>;
@@ -93,7 +95,7 @@ export class LocationService implements DistanceReset {
     return from.id + ':' + to.id;
   }
 
-  constructor(public idhelper: IdHelperService) {
+  constructor() {
     this.locationChanged = this.locationChangedEmitter = new Subject();
     this.locationsChanged = this.locationsChangedEmitter = new Subject();
     this.distanceChanged = this.distanceChangedEmitter = new Subject();
@@ -121,7 +123,7 @@ export class LocationService implements DistanceReset {
   editLocation(id: string, name: string, address: string): Location {
     const location = this._locations.get(id);
     if (!location) {
-        return;
+      return;
     }
 
     location.name = name;

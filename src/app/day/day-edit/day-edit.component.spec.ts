@@ -25,8 +25,8 @@ describe('DayEditComponent', () => {
         MatListModule,
         MatFormFieldModule,
         MatSelectModule,
+        DayEditComponent,
       ],
-      declarations: [ DayEditComponent ],
       providers: [
         LocationService,
         IdHelperService,
@@ -35,14 +35,14 @@ describe('DayEditComponent', () => {
         MapsService,
       ]
     })
-    .overrideComponent(DayEditComponent, {
-      add: {
-        providers: [
-          MonthEditComponent,
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(DayEditComponent, {
+        add: {
+          providers: [
+            MonthEditComponent,
+          ]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

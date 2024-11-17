@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
-
 import { DayDateComponent } from './day-date.component';
+
+import { registerLocaleData } from '@angular/common';
+import localeDE from '@angular/common/locales/de';
+registerLocaleData(localeDE);
 
 describe('DayDateComponent', () => {
   let component: DayDateComponent;
@@ -9,16 +12,16 @@ describe('DayDateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DayDateComponent ]
+      imports: [DayDateComponent],
     })
-    .overrideComponent(DayDateComponent, {
-      add: {
-        providers: [
-          MonthEditComponent,
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(DayDateComponent, {
+        add: {
+          providers: [
+            MonthEditComponent,
+          ]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,16 +1,25 @@
-import {Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef} from '@angular/core';
+import { NgFor } from '@angular/common';
+import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
+import { DayDateComponent } from '@app/day/day-date/day-date.component';
+import { DayEditComponent } from '@app/day/day-edit/day-edit.component';
+import { DayViewComponent } from '@app/day/day-view/day-view.component';
 
 @Component({
-    selector: 'app-month-edit',
-    templateUrl: './month-edit.component.html',
-    styleUrls: ['./month-edit.component.css']
+  selector: 'app-month-edit',
+  templateUrl: './month-edit.component.html',
+  styleUrls: ['./month-edit.component.css'],
+  standalone: true,
+  imports: [MatAccordion, NgFor, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, DayDateComponent, MatExpansionPanelDescription, DayViewComponent, DayEditComponent]
 })
-export class MonthEditComponent implements OnInit {
+export class MonthEditComponent {
+  cd = inject(ChangeDetectorRef);
+
 
   private _year: number;
   private _month: number;
 
-  private _days: any[];
+  private _days: number[];
 
   private _selected = 1;
 
@@ -34,7 +43,7 @@ export class MonthEditComponent implements OnInit {
     return this._month;
   }
 
-  get days(): any[] {
+  get days(): number[] {
     return this._days;
   }
 
@@ -47,9 +56,8 @@ export class MonthEditComponent implements OnInit {
   }
 
   updateDays() {
-    const days = [];
+    const days: number[] = [];
     if (this._year && this._month >= 0) {
-      const first = new Date(this._year, this._month, 1);
       const stop = new Date(this._year, this._month + 1, 1);
       for (let i = 1; i <= 31; i++) {
         const current = new Date(this._year, this._month, i);
@@ -62,8 +70,6 @@ export class MonthEditComponent implements OnInit {
     this._days = days;
   }
 
-  constructor(public cd: ChangeDetectorRef) {}
-
   pad(val: number): string {
     let result = '' + val;
     while (result.length < 2) {
@@ -74,9 +80,6 @@ export class MonthEditComponent implements OnInit {
 
   public makeId(day: number): string {
     return this.year + '-' + this.pad(this.month + 1) + '-' + this.pad(day);
-  }
-
-  ngOnInit() {
   }
 
 }

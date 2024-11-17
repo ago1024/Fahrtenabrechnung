@@ -1,11 +1,11 @@
-import { Component, inject } from "@angular/core";
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Location } from '../../services/location.service';
+import { Location } from '@app/services/location.service';
 
 export type EditLocationDialogData = Omit<Location, 'id'>;
 export type EditLocationDialogResult = Omit<Location, 'id'> & { resetDistances: boolean };
@@ -15,7 +15,6 @@ export type EditLocationDialogResult = Omit<Location, 'id'> & { resetDistances: 
   styleUrls: ['edit-location.dialog.css'],
   standalone: true,
   imports: [
-    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,

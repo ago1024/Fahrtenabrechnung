@@ -3,6 +3,11 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "plugins": [
+    "eslint-plugin-rxjs",
+    "eslint-plugin-rxjs-angular",
+    "@stylistic"
+  ],
   "overrides": [
     {
       "files": [
@@ -15,10 +20,15 @@
         "createDefaultProgram": true
       },
       "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:rxjs/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "rxjs-angular/prefer-takeuntil": [ "warn" ],
+        "@stylistic/quotes": [ "error", "single" ],
+        "@stylistic/indent": [ "error", 2 ],
         "@angular-eslint/no-empty-lifecycle-method": [
           "warn"
         ],

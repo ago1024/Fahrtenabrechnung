@@ -1,16 +1,22 @@
-import {LocationService, Location} from '../../services/location.service';
-import { ReportService, Day } from '../../services/report.service';
-import {WaypointService, Step} from '../../services/waypoint.service';
-import {DatePipe} from '@angular/common';
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { Component, Input, OnChanges, inject } from '@angular/core';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatRow, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { Location, LocationService } from '@app/services/location.service';
+import { Day, ReportService } from '@app/services/report.service';
+import { WaypointService } from '@app/services/waypoint.service';
 
 @Component({
   selector: 'app-month-report',
   templateUrl: './month-report.component.html',
-  styleUrls: ['./month-report.component.css']
+  styleUrls: ['./month-report.component.css'],
+  standalone: true,
+  imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, NgIf, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
-export class MonthReportComponent implements OnInit, OnChanges {
+export class MonthReportComponent implements OnChanges {
+  waypointService = inject(WaypointService);
+  locationService = inject(LocationService);
+  reportService = inject(ReportService);
+
 
   @Input()
   year: number;
@@ -23,12 +29,12 @@ export class MonthReportComponent implements OnInit, OnChanges {
   locations: MatTableDataSource<Location>;
   days: MatTableDataSource<Day>;
 
-  constructor(public waypointService: WaypointService, public locationService: LocationService, public reportService: ReportService) {
-    locationService.locationsChanged.subscribe(event => this.update());
-    waypointService.changed.subscribe(event => this.update());
-  }
+  constructor() {
+    const waypointService = this.waypointService;
+    const locationService = this.locationService;
 
-  ngOnInit() {
+    locationService.locationsChanged.subscribe(() => this.update());
+    waypointService.changed.subscribe(() => this.update());
   }
 
   update(): void {

@@ -17,8 +17,8 @@ describe('DayViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatDialogModule,
+        DayViewComponent,
       ],
-      declarations: [DayViewComponent],
       providers: [
         LocationService,
         IdHelperService,
@@ -27,14 +27,14 @@ describe('DayViewComponent', () => {
         MapsService,
       ]
     })
-    .overrideComponent(DayViewComponent, {
-      add: {
-        providers: [
-          MonthEditComponent,
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(DayViewComponent, {
+        add: {
+          providers: [
+            MonthEditComponent,
+          ]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

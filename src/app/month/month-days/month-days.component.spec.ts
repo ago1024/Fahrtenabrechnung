@@ -16,8 +16,8 @@ describe('MonthDaysComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatTableModule,
+        MonthDaysComponent,
       ],
-      declarations: [ MonthDaysComponent ],
       providers: [
         WaypointService,
         LocationService,
@@ -26,7 +26,7 @@ describe('MonthDaysComponent', () => {
         ReportService,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

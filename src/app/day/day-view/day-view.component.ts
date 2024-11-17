@@ -1,27 +1,37 @@
-import {LocationService, Location} from '../../services/location.service';
-import {WaypointService, Step} from '../../services/waypoint.service';
-import {MapsService} from '../../services/maps.service';
-import {MonthEditComponent} from '../../month/month-edit/month-edit.component';
-import {Component, Input, Host, OnInit, OnChanges, SimpleChanges, OnDestroy, Inject} from '@angular/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, Input, OnChanges, OnDestroy, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton, MatMiniFabButton } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatFormField, MatSuffix } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
+import { Location, LocationService } from '@app/services/location.service';
+import { MapsService } from '@app/services/maps.service';
+import { Step, WaypointService } from '@app/services/waypoint.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'distance-edit.component.html',
-  styleUrls: ['distance-edit.component.css']
+  styleUrls: ['distance-edit.component.css'],
+  standalone: true,
+  imports: [MatDialogTitle, CdkScrollable, MatDialogContent, MatFormField, FormsModule, MatInput, MatSuffix, MatButton, MatDialogClose, MatDialogActions]
 })
-export class DistanceEditComponent implements OnInit {
+export class DistanceEditComponent {
+  dialogRef = inject<MatDialogRef<DistanceEditComponent>>(MatDialogRef);
+  data = inject(MAT_DIALOG_DATA);
+
 
   url: SafeResourceUrl;
 
-  constructor(public dialogRef: MatDialogRef<DistanceEditComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    sanitizer: DomSanitizer) {
-    this.url = sanitizer.bypassSecurityTrustResourceUrl(data.url);
-  }
+  constructor() {
+    const data = this.data;
+    const sanitizer = inject(DomSanitizer);
 
-  ngOnInit() {
+    this.url = sanitizer.bypassSecurityTrustResourceUrl(data.url);
   }
 
   get isValid() {
@@ -33,8 +43,20 @@ export class DistanceEditComponent implements OnInit {
   selector: 'app-day-view',
   templateUrl: './day-view.component.html',
   styleUrls: ['./day-view.component.css'],
+  standalone: true,
+  imports: [
+    NgFor,
+    NgIf,
+    MatMiniFabButton,
+  ],
 })
 export class DayViewComponent implements OnChanges, OnDestroy {
+  private parent = inject(MonthEditComponent, { host: true });
+  locationService = inject(LocationService);
+  waypointService = inject(WaypointService);
+  mapsService = inject(MapsService);
+  dialog = inject(MatDialog);
+
   @Input()
   year: number;
 
@@ -54,8 +76,7 @@ export class DayViewComponent implements OnChanges, OnDestroy {
 
   private ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor( @Host() private parent: MonthEditComponent, public locationService: LocationService, public waypointService: WaypointService,
-    public mapsService: MapsService, public dialog: MatDialog) {
+  constructor() {
 
     this.waypointService.changed
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -89,7 +110,7 @@ export class DayViewComponent implements OnChanges, OnDestroy {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.update(this.id);
   }
 
