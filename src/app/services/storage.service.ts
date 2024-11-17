@@ -1,17 +1,22 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { LocalStorageService } from '@app/services/local-storage.service';
 import { WaypointEntries } from './waypoint.service';
 
 @Injectable()
 export class StorageService {
 
-  private key = 'app.Fahrtenabrechnung';
+  private readonly localStorageService = inject(LocalStorageService);
 
   get data(): WaypointEntries {
-    return JSON.parse(localStorage.getItem(this.key)) ?? { 'locations': [], 'distances': [], 'waypoints': [] };
+    const data = this.localStorageService.data;
+    if (data) {
+      return JSON.parse(data);
+    }
+    return { 'locations': [], 'distances': [], 'waypoints': [] };
   }
 
   set data(data: WaypointEntries) {
-    localStorage.setItem(this.key, JSON.stringify(data));
+    this.localStorageService.data = JSON.stringify(data);
   }
 
   constructor() {}

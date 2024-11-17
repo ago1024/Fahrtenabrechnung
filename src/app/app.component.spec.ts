@@ -1,10 +1,11 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { WaypointService } from '@app/services/waypoint.service';
-import { LocationService } from '@app/services/location.service';
-import { StorageService } from '@app/services/storage.service';
-import { IdHelperService } from '@app/services/id-helper.service';
 import { ExportService } from '@app/services/export.service';
+import { IdHelperService } from '@app/services/id-helper.service';
+import { LocationService } from '@app/services/location.service';
+import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { WaypointService } from '@app/services/waypoint.service';
+import { AppComponent } from './app.component';
+
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -16,7 +17,7 @@ describe('AppComponent', () => {
         LocationService,
         IdHelperService,
         ExportService,
-        { provide: StorageService, useValue: { data: { 'locations': [], 'distances': [], 'waypoints': [] } } },
+        provideTestStorageService(),
       ],
     }).compileComponents();
   }));

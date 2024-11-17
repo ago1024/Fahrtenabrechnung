@@ -30,19 +30,19 @@ export class ReportService {
     if (year && month >= 0) {
       const stop = new Date(year, month + 1, 1);
       for (let i = 1; i <= 31; i++) {
-        const current = new Date(year, month, i);
+        const current = new Date(Date.UTC(year, month, i));
         if (current.getTime() >= stop.getTime()) {
           break;
         }
-        const id = formatDate(current, 'yyyy-MM-dd', this.localeId);
-        const waypoints = this.waypointService.getWaypoints(id);
-        const steps = this.waypointService.getSteps(id);
+        const date = formatDate(current, 'yyyy-MM-dd', this.localeId);
+        const waypoints = this.waypointService.getWaypoints(date);
+        const steps = this.waypointService.getSteps(date);
         const distance = this.waypointService.getTotalDistance(steps);
 
         waypoints.forEach(location => locations.set(location.id, location));
 
         days.push({
-          day: id,
+          day: date,
           date: current,
           waypoints: waypoints,
           steps: steps,
@@ -51,7 +51,7 @@ export class ReportService {
       }
     }
 
-    const loc = Array.from(locations.values()).sort((a, b) => Number.parseInt(a.id) - Number.parseInt(b.id));
+    const loc = Array.from(locations.values()).sort((a, b) => Number.parseInt(a.id) - Number.parseInt(b.id)).map(({id, name, address}) => ({id, name, address}));
 
     return {
       days: days,

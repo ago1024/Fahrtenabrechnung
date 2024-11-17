@@ -1,12 +1,16 @@
-import { Injectable, LOCALE_ID, inject } from '@angular/core';
-import { saveAs as importSaveAs } from 'file-saver';
+import { formatDate } from '@angular/common';
+import { Injectable, InjectionToken, LOCALE_ID, inject } from '@angular/core';
+import { saveAs } from 'file-saver';
+
 import { StorageService } from './storage.service';
 import { WaypointEntries } from './waypoint.service';
-import { formatDate } from '@angular/common';
+
+export const SAVE_AS = new InjectionToken<(blob: Blob, filename: string) => void>('SaveAs', { factory: () => (blob, filename) => saveAs(blob, filename) });
 
 @Injectable()
 export class ExportService {
   private storageService = inject(StorageService);
+  private saveAs = inject(SAVE_AS);
   private localeId = inject(LOCALE_ID);
 
 
@@ -26,10 +30,10 @@ export class ExportService {
     const blob = this.toBlob();
     const date = formatDate(new Date(), 'yyyy-MM-dd', this.localeId);
     const filename = `Fahrtenabrechnung-${date}.json`;
-    importSaveAs(blob, filename);
+    this.saveAs(blob, filename);
   }
 
   public isValid(data: unknown): data is WaypointEntries {
-    return typeof data === 'object' && data[this.VERIFY_KEY] === this.VERIFY_DATA;
+    return data != null && typeof data === 'object' && data[this.VERIFY_KEY] === this.VERIFY_DATA;
   }
 }

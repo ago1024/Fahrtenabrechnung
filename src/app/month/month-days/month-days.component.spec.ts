@@ -3,9 +3,9 @@ import { MatTableModule } from '@angular/material/table';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { LocationService } from '@app/services/location.service';
 import { ReportService } from '@app/services/report.service';
-import { StorageService } from '@app/services/storage.service';
 import { WaypointService } from '@app/services/waypoint.service';
 
+import { provideTestStorageService } from '@app/services/storage.service.spec';
 import { MonthDaysComponent } from './month-days.component';
 
 describe('MonthDaysComponent', () => {
@@ -22,7 +22,7 @@ describe('MonthDaysComponent', () => {
         WaypointService,
         LocationService,
         IdHelperService,
-        StorageService,
+        provideTestStorageService(),
         ReportService,
       ],
     })

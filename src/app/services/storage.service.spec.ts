@@ -1,21 +1,39 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
+import { Provider } from '@angular/core';
+import { ILocalStorageService, LocalStorageService } from './local-storage.service';
 import { StorageService } from './storage.service';
+
+export function provideTestStorageService(): Provider {
+  return { provide: StorageService, useFactory: () => ({ data: { 'locations': [], 'distances': [], 'waypoints': [] } }) };
+}
 
 describe('StorageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [StorageService]
+      providers: [
+        StorageService,
+        { provider: LocalStorageService, useValue: { data: null } satisfies ILocalStorageService },
+      ]
     });
   });
 
-  it('should be created', inject([StorageService], (service: StorageService) => {
+  it('should be created', () => {
+    const service = TestBed.inject(StorageService);
     expect(service).toBeTruthy();
-  }));
+  });
 
-  it('should provide an initial state', inject([StorageService], (service: StorageService) => {
+  it('should provide an initial state', () => {
+    const service = TestBed.inject(StorageService);
     const expected = { 'locations': [], 'distances': [], 'waypoints': [] };
     expect(service.data).toEqual(expected);
-  }));
+  });
+
+  it('should store the new data', () => {
+    const service = TestBed.inject(StorageService);
+    const localStorageService = TestBed.inject(LocalStorageService);
+    service.data = { 'locations': [], 'distances': [], 'waypoints': [] };
+    expect(localStorageService.data).toEqual('{"locations":[],"distances":[],"waypoints":[]}');
+  });
 
 });

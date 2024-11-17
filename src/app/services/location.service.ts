@@ -59,8 +59,9 @@ class LocationImpl implements Location {
 
 }
 
-export class DistanceChange {
+export type DistanceChange = {
   location: Location;
+} | {
   from: Location;
   to: Location;
   distance: number;
@@ -117,7 +118,7 @@ export class LocationService implements DistanceReset {
     this.locationChangedEmitter.next(location);
     this.locationsChangedEmitter.next(undefined);
 
-    return location;
+    return { id: location.id, name: location.name, address: location.address };
   }
 
   editLocation(id: string, name: string, address: string): Location {
@@ -153,9 +154,7 @@ export class LocationService implements DistanceReset {
       }
     });
 
-    const distanceChange = new DistanceChange();
-    distanceChange.location = location;
-    this.distanceChangedEmitter.next(distanceChange);
+    this.distanceChangedEmitter.next({ location });
   }
 
   hasDistance(from: Location, to: Location): boolean {
@@ -169,11 +168,7 @@ export class LocationService implements DistanceReset {
   setDistance(from: Location, to: Location, distance: number) {
     this._distances.set(LocationService.key(from, to), distance);
 
-    const distanceChange = new DistanceChange();
-    distanceChange.from = from;
-    distanceChange.to = to;
-    distanceChange.distance = distance;
-    this.distanceChangedEmitter.next(distanceChange);
+    this.distanceChangedEmitter.next({ from, to, distance });
   }
 
   toJSON(): LocationEntries {

@@ -8,9 +8,9 @@ import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { LocationService } from '@app/services/location.service';
 import { MapsService } from '@app/services/maps.service';
-import { StorageService } from '@app/services/storage.service';
 import { WaypointService } from '@app/services/waypoint.service';
 import { DayEditComponent } from './day-edit.component';
+import { provideTestStorageService } from '@app/services/storage.service.spec';
 
 
 describe('DayEditComponent', () => {
@@ -31,7 +31,7 @@ describe('DayEditComponent', () => {
         LocationService,
         IdHelperService,
         WaypointService,
-        StorageService,
+        provideTestStorageService(),
         MapsService,
       ]
     })

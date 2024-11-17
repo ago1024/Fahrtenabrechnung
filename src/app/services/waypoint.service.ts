@@ -3,7 +3,7 @@ import {StorageService} from './storage.service';
 import { Injectable, inject } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
-export class Step {
+export type Step = {
   from: Location;
   to: Location;
   distance: number;
@@ -39,7 +39,7 @@ export class WaypointService {
   }
 
   onDistanceChange(change: DistanceChange) {
-    if (change.location) {
+    if ('location' in change) {
       this.onLocationChange(change.location);
     } else {
       this._waypoints.forEach((waypoints, date) => {
@@ -58,13 +58,16 @@ export class WaypointService {
     const waypoints = this.getWaypoints(date);
     const steps = [];
     let last: Location;
-    for (const waypoint of waypoints) {
+    for (const {id, name, address} of waypoints) {
+      const waypoint = { id, name, address };
       if (last !== undefined) {
-        const step = new Step();
-        step.from = last;
-        step.to = waypoint;
-        step.distance = this.locationService.getDistance(step.from, step.to);
-        steps.push(step);
+        const from = last;
+        const to = waypoint;
+        steps.push({
+          from,
+          to,
+          distance: this.locationService.getDistance(from, to),
+        });
       }
       last = waypoint;
     }

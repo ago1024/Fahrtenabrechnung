@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { StorageService } from '@app/services/storage.service';
 import { ExportService } from '@app/services/export.service';
 
-import { ExportButtonComponent } from './export-button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { ExportButtonComponent } from './export-button.component';
 
 describe('ExportButtonComponent', () => {
   let component: ExportButtonComponent;
@@ -12,7 +12,10 @@ describe('ExportButtonComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [MatIconModule, ExportButtonComponent],
-      providers: [ExportService, StorageService]
+      providers: [
+        ExportService,
+        provideTestStorageService(),
+      ]
     })
       .compileComponents();
   }));

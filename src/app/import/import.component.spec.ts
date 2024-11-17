@@ -4,9 +4,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ExportService } from '@app/services/export.service';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { LocationService } from '@app/services/location.service';
-import { StorageService } from '@app/services/storage.service';
 import { WaypointService } from '@app/services/waypoint.service';
 
+import { provideTestStorageService } from '@app/services/storage.service.spec';
 import { ImportComponent } from './import.component';
 
 describe('ImportComponent', () => {
@@ -21,7 +21,7 @@ describe('ImportComponent', () => {
         ImportComponent,
       ],
       providers: [
-        StorageService,
+        provideTestStorageService(),
         WaypointService,
         LocationService,
         IdHelperService,
