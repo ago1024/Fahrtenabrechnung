@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { Location, LocationService } from '@app/services/location.service';
-import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { provideTestStorageService } from '@app/services/storage.service.testing';
 
 import { WaypointService } from './waypoint.service';
 
@@ -37,7 +37,6 @@ describe('WaypointService', () => {
       jasmine.objectContaining({ id: '1', name: 'Waypoint 1', address: 'Address 1'}),
       jasmine.objectContaining({ id: '2', name: 'Waypoint 2', address: 'Address 2'}),
     ]);
-    console.log(service.getSteps('2020-01-01'));
     expect(service.getSteps('2020-01-01')).toEqual([{
       from: jasmine.objectContaining({ id: '1', name: 'Waypoint 1', address: 'Address 1'}),
       to: jasmine.objectContaining({ id: '2', name: 'Waypoint 2', address: 'Address 2'}),

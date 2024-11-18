@@ -1,6 +1,7 @@
 <p>
 	<mat-list>
-		<mat-list-item *ngFor="let w of waypointService.getWaypoints(id); let index = index">
+		@let id = makeId();
+		<mat-list-item *ngFor="let w of waypoints$ | async; let index = index">
 			<button mat-mini-fab (click)="waypointService.deleteWaypoint(id, index)" data-testid="remove-waypoint" >
 				<mat-icon>remove</mat-icon>
 			</button>
@@ -17,7 +18,7 @@
 			</button>
 			<mat-form-field subscriptSizing="dynamic">
 				<mat-select #box placeholder="Zielort auswählen" (selectionChange)="waypointService.addWaypoint(id, box.value); box.value = undefined">
-					<mat-option *ngFor="let location of locations" [value]="location">
+					<mat-option *ngFor="let location of locations$ | async" [value]="location">
 						{{location.name}}, {{location.address}}
 					</mat-option>
 				</mat-select>

@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, inject, input } from '@angular/core';
 import { MatAccordion, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
 import { DayDateComponent } from '@app/day/day-date/day-date.component';
 import { DayEditComponent } from '@app/day/day-edit/day-edit.component';
@@ -16,70 +16,26 @@ export class MonthEditComponent {
   cd = inject(ChangeDetectorRef);
 
 
-  private _year: number;
-  private _month: number;
+  readonly year = input.required<number>();
+  readonly month = input.required<number>();
 
-  private _days: number[];
+  readonly days = computed(() => this.updateDays(this.year(), this.month()));
 
-  private _selected = 1;
+  selected = 1;
 
-  @Input()
-  set year(year: number) {
-    this._year = year;
-    this.updateDays();
-  }
-
-  get year(): number {
-    return this._year;
-  }
-
-  @Input()
-  set month(month: number) {
-    this._month = month;
-    this.updateDays();
-  }
-
-  get month(): number {
-    return this._month;
-  }
-
-  get days(): number[] {
-    return this._days;
-  }
-
-  get selected(): number {
-    return this._selected;
-  }
-
-  set selected(selected: number) {
-    this._selected = selected;
-  }
-
-  updateDays() {
+  private updateDays(year: number, month: number): number[] {
     const days: number[] = [];
-    if (this._year && this._month >= 0) {
-      const stop = new Date(this._year, this._month + 1, 1);
+    if (year && month >= 0) {
+      const stop = new Date(year, month + 1, 1);
       for (let i = 1; i <= 31; i++) {
-        const current = new Date(this._year, this._month, i);
+        const current = new Date(year, month, i);
         if (current.getTime() >= stop.getTime()) {
           break;
         }
         days.push(i);
       }
     }
-    this._days = days;
-  }
-
-  pad(val: number): string {
-    let result = '' + val;
-    while (result.length < 2) {
-      result = '0' + result;
-    }
-    return result;
-  }
-
-  public makeId(day: number): string {
-    return this.year + '-' + this.pad(this.month + 1) + '-' + this.pad(day);
+    return days;
   }
 
 }

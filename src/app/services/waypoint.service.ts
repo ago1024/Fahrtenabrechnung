@@ -6,10 +6,16 @@ import {Observable, Subject} from 'rxjs';
 export type Step = {
   from: Location;
   to: Location;
-  distance: number;
+  distance: number | undefined;
 }
 
 export type WaypointEntries = { locations: Location[], distances: [string, number][], waypoints: [string, string[]][] };
+
+const MISSING_LOCATION = {
+  id: '',
+  name: 'FEHLEND',
+  address: '',
+}
 
 @Injectable()
 export class WaypointService {
@@ -56,8 +62,8 @@ export class WaypointService {
 
   getSteps(date: string): Step[] {
     const waypoints = this.getWaypoints(date);
-    const steps = [];
-    let last: Location;
+    const steps: Step[] = [];
+    let last: Location | undefined = undefined;
     for (const {id, name, address} of waypoints) {
       const waypoint = { id, name, address };
       if (last !== undefined) {
@@ -74,11 +80,11 @@ export class WaypointService {
     return steps;
   }
 
-  getTotalDistance(steps: Step[]): number {
-    let totalDistance = 0;
+  getTotalDistance(steps: Step[]): number | undefined {
+    let totalDistance: number = 0;
     for (const step of steps) {
-      if (totalDistance === undefined || step.distance === undefined) {
-        totalDistance = undefined;
+      if (step.distance === undefined) {
+        return;
       } else {
         totalDistance += step.distance;
       }
@@ -91,7 +97,7 @@ export class WaypointService {
       return [];
     }
 
-    return this._waypoints.get(date).map(id => this.locationService.getLocation(id));
+    return this._waypoints.get(date)?.map(id => this.locationService.getLocation(id) ?? MISSING_LOCATION) ?? [];
   }
 
   addWaypoint(date: string, location: Location) {

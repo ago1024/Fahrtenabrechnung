@@ -25,7 +25,7 @@ export type EditLocationDialogResult = Omit<Location, 'id'> & { resetDistances: 
 })
 export class EditLocationDialogComponent {
 
-  public readonly dialogRef = inject(MatDialogRef<EditLocationDialogComponent>);
+  public readonly dialogRef = inject(MatDialogRef<EditLocationDialogComponent, EditLocationDialogResult>);
 
   private readonly fb = inject(FormBuilder);
 

@@ -3,7 +3,7 @@ import { IdHelperService } from '@app/services/id-helper.service';
 import { Location, LocationService } from '@app/services/location.service';
 import { WaypointService } from '@app/services/waypoint.service';
 
-import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { provideTestStorageService } from '@app/services/storage.service.testing';
 import { ReportService } from './report.service';
 
 function* dateRange(startDate: string, endDate: string) {

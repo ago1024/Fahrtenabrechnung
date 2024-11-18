@@ -5,13 +5,11 @@ async function addWaypoint(page: Page, options: { name: string, address: string,
   await button.click();
 
   const dialog = page.locator('mat-dialog-container');
-  const name = dialog.locator('input[name="name"]');
-  const address = dialog.locator('input[name="address"]');
 
   await expect(dialog).toContainText('Zielort hinzufügen');
 
-  await name.fill(options.name);
-  await address.fill(options.address);
+  await dialog.locator('input[name="name"]').fill(options.name);
+  await dialog.locator('input[name="address"]').fill(options.address);
 
   await dialog.getByRole('button', { name: 'Hinzufügen' }).click();
 }

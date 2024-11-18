@@ -1,9 +1,11 @@
 import { DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnChanges, inject } from '@angular/core';
-import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatRow, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
-import { Location, LocationService } from '@app/services/location.service';
-import { Day, ReportService } from '@app/services/report.service';
+import { Component, inject, input } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatRow, MatRowDef, MatTable } from '@angular/material/table';
+import { LocationService } from '@app/services/location.service';
+import { ReportService } from '@app/services/report.service';
 import { WaypointService } from '@app/services/waypoint.service';
+import { combineLatest, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-month-report',
@@ -12,38 +14,23 @@ import { WaypointService } from '@app/services/waypoint.service';
   standalone: true,
   imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, NgIf, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
-export class MonthReportComponent implements OnChanges {
-  waypointService = inject(WaypointService);
-  locationService = inject(LocationService);
-  reportService = inject(ReportService);
+export class MonthReportComponent {
+  readonly waypointService = inject(WaypointService);
+  readonly locationService = inject(LocationService);
+  readonly reportService = inject(ReportService);
 
+  readonly year = input.required<number>();
+  readonly month = input.required<number>();
 
-  @Input()
-  year: number;
+  readonly displayedColumns = ['date', 'steps', 'distance'];
 
-  @Input()
-  month: number;
-
-  displayedColumns = ['date', 'steps', 'distance'];
-  locationColumns = ['id', 'name', 'address'];
-  locations: MatTableDataSource<Location>;
-  days: MatTableDataSource<Day>;
-
-  constructor() {
-    const waypointService = this.waypointService;
-    const locationService = this.locationService;
-
-    locationService.locationsChanged.subscribe(() => this.update());
-    waypointService.changed.subscribe(() => this.update());
-  }
-
-  update(): void {
-    const report = this.reportService.update(this.year, this.month);
-    this.days = new MatTableDataSource<Day>(report.days);
-    this.locations = new MatTableDataSource<Location>(report.locations);
-  }
-
-  ngOnChanges(): void {
-    this.update();
-  }
+  readonly days$ = combineLatest([
+    toObservable(this.year),
+    toObservable(this.month),
+    this.locationService.locationsChanged.pipe(startWith(null)),
+    this.waypointService.changed.pipe(startWith(null)),
+  ]).pipe(
+    map(([year, month]) => this.reportService.update(year, month)),
+    map(report => report.days),
+  );
 }

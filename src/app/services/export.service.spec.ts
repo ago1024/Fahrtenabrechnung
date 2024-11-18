@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { provideTestStorageService } from '@app/services/storage.service.testing';
 import { ExportService, SAVE_AS } from './export.service';
 import { formatDate } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';

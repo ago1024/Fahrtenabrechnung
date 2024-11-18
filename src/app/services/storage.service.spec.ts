@@ -1,12 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Provider } from '@angular/core';
 import { ILocalStorageService, LocalStorageService } from './local-storage.service';
 import { StorageService } from './storage.service';
 
-export function provideTestStorageService(): Provider {
-  return { provide: StorageService, useFactory: () => ({ data: { 'locations': [], 'distances': [], 'waypoints': [] } }) };
-}
+export { provideTestStorageService } from './storage.service.testing';
 
 describe('StorageService', () => {
   beforeEach(() => {

@@ -23,7 +23,7 @@ export type CreateLocationDialogResult = Omit<Location, 'id'>;
 })
 export class CreateLocationDialogComponent {
 
-  public readonly dialogRef = inject(MatDialogRef<CreateLocationDialogComponent>);
+  public readonly dialogRef = inject(MatDialogRef<CreateLocationDialogComponent, CreateLocationDialogResult>);
 
   private readonly fb = inject(FormBuilder);
 
