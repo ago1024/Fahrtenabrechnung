@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 
 import { StorageService } from './storage.service';
 import { WaypointEntries } from './waypoint.service';
+import { ExportV1Schema } from './types';
 
 export const SAVE_AS = new InjectionToken<(blob: Blob, filename: string) => void>('SaveAs', { factory: () => (blob, filename) => saveAs(blob, filename) });
 
@@ -21,7 +22,7 @@ export class ExportService {
   public toBlob(): Blob {
     const data = {
       ...this.storageService.data,
-      Fahrtenaberechnung_Version: VERIFY_DATA,
+      [VERIFY_KEY]: VERIFY_DATA,
     };
     const blob = new Blob(['\ufeff', JSON.stringify(data)], { type: 'application/json' });
     return blob;
@@ -35,6 +36,7 @@ export class ExportService {
   }
 
   public isValid(data: unknown): data is WaypointEntries {
-    return data != null && typeof data === 'object' && VERIFY_KEY in data && data[VERIFY_KEY] === VERIFY_DATA;
+    const result = ExportV1Schema.safeParse(data);
+    return result.success;
   }
 }
