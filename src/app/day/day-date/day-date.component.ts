@@ -1,6 +1,17 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
-import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
+import { Component, computed, input } from '@angular/core';
+
+function pad(val: number): string {
+  let result = '' + val;
+  while (result.length < 2) {
+    result = '0' + result;
+  }
+  return result;
+}
+
+export function makeId(year: number, month: number, day: number): string {
+  return year + '-' + pad(month + 1) + '-' + pad(day);
+}
 
 @Component({
   selector: 'app-day-date',
@@ -10,23 +21,13 @@ import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
   imports: [DatePipe]
 })
 export class DayDateComponent {
-  private parent = inject(MonthEditComponent, { host: true });
 
-  @Input({ required: true })
-  year!: number;
+  readonly year = input.required<number>();
 
-  @Input({ required: true })
-  month!: number;
+  readonly month = input.required<number>();
 
-  @Input({ required: true })
-  day!: number;
+  readonly day = input.required<number>();
 
-  get id(): string {
-    return this.parent.makeId(this.day);
-  }
-
-  get date(): Date {
-    return new Date(this.year, this.month, this.day);
-  }
+  readonly date = computed(() => new Date(this.year(), this.month(), this.day()));
 
 }

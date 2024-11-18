@@ -1,15 +1,17 @@
 <h1 mat-dialog-title>Entfernung ändern</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <input placeholder="Entfernung" type="number" matInput tabindex="1" lang="de" [(ngModel)]="data.distance" name="distance">
-    <span matSuffix>km</span>
-  </mat-form-field>
-  <button mat-button color="primary" [mat-dialog-close]="data.distance" [disabled]="!isValid">Ändern</button>
-  <div>
-  	<iframe width="100%" height="600px" [src]="url" style="border: 0"></iframe>
-  </div>
+  <form [formGroup]="form" #formGroup>
+    <mat-form-field>
+      <input type="number" matInput formControlName="distance" name="distance" placeholder="Entfernung" tabindex="1" lang="de">
+      <span matSuffix>km</span>
+    </mat-form-field>
+    <button mat-button color="primary" [mat-dialog-close]="form.value.distance" [disabled]="!form.valid">Ändern</button>
+    <div>
+      <iframe width="100%" height="600px" [src]="url" style="border: 0"></iframe>
+    </div>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="dialogRef.close()">Abbrechen</button>
-  <button mat-button color="primary" [mat-dialog-close]="data.distance" [disabled]="!isValid">Ändern</button>
+  <button mat-button [mat-dialog-close]="undefined">Abbrechen</button>
+  <button mat-button color="primary" [mat-dialog-close]="form.value.distance" [disabled]="!form.valid">Ändern</button>
 </div>

@@ -1,5 +1,5 @@
 <p>
-  <span *ngFor="let step of steps; let last = last">
+  <span *ngFor="let step of steps$ | async; let last = last">
   	<span>
   		{{step.from.id}}
   	</span>
@@ -13,7 +13,7 @@
 	  	{{step.to.id}}
   	</span>
   </span>
-  <span *ngIf="totalDistance !== undefined">
+  <span *ngIf="(totalDistance$ | async) as totalDistance">
   	Gesamt: {{totalDistance}} km
   </span>
 </p>

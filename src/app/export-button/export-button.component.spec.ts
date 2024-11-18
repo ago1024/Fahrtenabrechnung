@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ExportService } from '@app/services/export.service';
 
 import { MatIconModule } from '@angular/material/icon';
-import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { provideTestStorageService } from '@app/services/storage.service.testing';
 import { ExportButtonComponent } from './export-button.component';
 
 describe('ExportButtonComponent', () => {

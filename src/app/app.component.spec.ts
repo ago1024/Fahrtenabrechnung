@@ -2,7 +2,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { ExportService } from '@app/services/export.service';
 import { IdHelperService } from '@app/services/id-helper.service';
 import { LocationService } from '@app/services/location.service';
-import { provideTestStorageService } from '@app/services/storage.service.spec';
+import { provideTestStorageService } from '@app/services/storage.service.testing';
 import { WaypointService } from '@app/services/waypoint.service';
 import { AppComponent } from './app.component';
 

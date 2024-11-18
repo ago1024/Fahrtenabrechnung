@@ -1,5 +1,6 @@
-import { NgFor } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { MatIconButton, MatMiniFabButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,10 +8,11 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatList, MatListItem } from '@angular/material/list';
 import { MatSelect } from '@angular/material/select';
-import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
+import { makeId } from '@app/day/day-date/day-date.component';
 import { Location, LocationService } from '@app/services/location.service';
 import { MapsService } from '@app/services/maps.service';
 import { WaypointService } from '@app/services/waypoint.service';
+import { combineLatest, firstValueFrom, map, startWith } from 'rxjs';
 import { CreateLocationDialogComponent, CreateLocationDialogResult } from './create-location.dialog';
 import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialogResult } from './edit-location.dialog';
 
@@ -20,70 +22,57 @@ import { EditLocationDialogComponent, EditLocationDialogData, EditLocationDialog
   styleUrls: ['./day-edit.component.css'],
   providers: [],
   standalone: true,
-  imports: [MatList, NgFor, MatListItem, MatMiniFabButton, MatIcon, MatIconButton, MatFormField, MatSelect, MatOption]
+  imports: [AsyncPipe, MatList, NgFor, MatListItem, MatMiniFabButton, MatIcon, MatIconButton, MatFormField, MatSelect, MatOption]
 })
-export class DayEditComponent implements OnInit {
-  private parent = inject(MonthEditComponent, { host: true });
-  locationService = inject(LocationService);
-  waypointService = inject(WaypointService);
-  mapsService = inject(MapsService);
-  dialog = inject(MatDialog);
+export class DayEditComponent {
+  readonly locationService = inject(LocationService);
+  readonly waypointService = inject(WaypointService);
+  readonly mapsService = inject(MapsService);
+  readonly dialog = inject(MatDialog);
 
 
-  @Input({ required: true })
-  year!: number;
+  readonly year = input.required<number>();
+  readonly month = input.required<number>();
+  readonly day = input.required<number>();
+  readonly makeId = computed(() => makeId(this.year(), this.month(), this.day()));
 
-  @Input({ required: true })
-  month!: number;
+  locations$ = this.locationService.locationsChanged.pipe(startWith(null)).pipe(
+    map(() => Array.from(this.locationService.locations))
+  );
 
-  @Input({ required: true })
-  day!: number;
+  waypoints$ = combineLatest([
+    toObservable(this.makeId),
+    this.locationService.locationsChanged.pipe(startWith(null)),
+    this.waypointService.changed.pipe(startWith(null)),
+  ]).pipe(
+    map(([id]) => this.waypointService.getWaypoints(id)),
+  );
 
-  locations!: Location[];
-
-  get id(): string {
-    return this.parent.makeId(this.day);
-  }
-
-  constructor() {
-    this.locationService.locationsChanged.subscribe(() => this.updateLocations());
-  }
-
-  updateLocations() {
-    this.locations = Array.from(this.locationService.locations);
-  }
-
-  ngOnInit(): void {
-    this.updateLocations();
-  }
-
-  createLocation() {
+  async createLocation() {
     const dialogRef = this.dialog.open<CreateLocationDialogComponent, never, CreateLocationDialogResult>(CreateLocationDialogComponent, {
       width: '400px'
     });
-    dialogRef.afterClosed().subscribe(data => {
-      if (!data) {
-        return;
-      }
-      const location = this.locationService.createLocation(data.name, data.address);
-      this.waypointService.addWaypoint(this.id, location);
-    });
+    const data = await firstValueFrom(dialogRef.afterClosed());
+    if (!data) {
+      return;
+    }
+    const location = this.locationService.createLocation(data.name, data.address);
+    this.waypointService.addWaypoint(this.makeId(), location);
   }
 
-  editLocation({id, name, address}: Location) {
+  async editLocation({id, name, address}: Location) {
     const dialogRef = this.dialog.open<EditLocationDialogComponent, Partial<EditLocationDialogData>, EditLocationDialogResult>(EditLocationDialogComponent, {
       width: '400px',
       data: { name, address },
     });
-    dialogRef.afterClosed().subscribe(data => {
-      if (!data) {
-        return;
-      }
-      const location = this.locationService.editLocation(id, data.name, data.address);
-      if (location && data.resetDistances) {
-        this.locationService.resetDistances(location);
-      }
-    });
+    const data = await firstValueFrom(dialogRef.afterClosed());
+    if (!data) {
+      return;
+    }
+    const location = this.locationService.editLocation(id, data.name, data.address);
+    if (location && data.resetDistances) {
+      this.locationService.resetDistances(location);
+    }
   }
 
 }

@@ -1,11 +1,11 @@
 <h2>Fahrstrecken</h2>
 <p>
-	<mat-table [dataSource]="days">
+	<mat-table [dataSource]="days$">
 		<ng-container matColumnDef="date">
 			<mat-header-cell *matHeaderCellDef>Datum</mat-header-cell>
 			<mat-cell *matCellDef="let day">{{day.date | date:'d. MMMM yyyy':'':'de'}}</mat-cell>
-		</ng-container> 
-	
+		</ng-container>
+
 		<ng-container matColumnDef="steps">
 			<mat-header-cell *matHeaderCellDef>Datum</mat-header-cell>
 			<mat-cell *matCellDef="let day">
@@ -15,15 +15,15 @@
 					<span *ngIf="last">{{step.to.id}}</span>
 				</span>
 			</mat-cell>
-		</ng-container> 
-	
+		</ng-container>
+
 		<ng-container matColumnDef="distance">
 			<mat-header-cell *matHeaderCellDef>Entfernung</mat-header-cell>
-			<mat-cell *matCellDef="let day">{{day.distance}}km</mat-cell>
+			<mat-cell *matCellDef="let day">@if(day.distance !== undefined) {{{day.distance}} km} @else {unbekannt}</mat-cell>
 		</ng-container>
-		
+
 		<mat-header-row> *matHeaderRowDef="displayColumns"></mat-header-row>
-		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>	
+		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 	</mat-table>
 </p>
 
