@@ -8,7 +8,7 @@ export interface Day {
   date: Date;
   waypoints: Location[];
   steps: Step[];
-  distance: number;
+  distance: number | undefined;
 }
 
 export interface Report {

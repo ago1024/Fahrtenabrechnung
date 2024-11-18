@@ -1,10 +1,14 @@
-import { ApplicationRef, Component, HostListener, ViewChild, inject } from '@angular/core';
+import { ApplicationRef, Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExportService } from '../services/export.service';
 import { StorageService } from '../services/storage.service';
 import { WaypointService } from '../services/waypoint.service';
+
+function isValidTarget(target: EventTarget | null): target is HTMLElement {
+  return target instanceof HTMLElement;
+}
 
 @Component({
   selector: 'app-import',
@@ -21,51 +25,72 @@ export class ImportComponent {
   private applicationRef = inject(ApplicationRef);
 
 
-  @ViewChild('file', { static: true }) file;
+  @ViewChild('file', { static: true }) file?: ElementRef<HTMLInputElement>;
 
   @HostListener('drag', ['$event']) ondrag(e: Event) {
     e.preventDefault();
     e.stopPropagation();
   }
 
-  @HostListener('dragstart', ['$event']) ondragstart(e: Event) {
+  @HostListener('dragstart', ['$event']) ondragstart(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
   }
 
-  @HostListener('dragend', ['$event']) ondragend(e) {
+  @HostListener('dragend', ['$event']) ondragend(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    if (!isValidTarget(e.target)) {
+      return;
+    }
     e.target.classList.remove('is-dragover');
   }
 
-  @HostListener('dragover', ['$event']) ondragover(e) {
+  @HostListener('dragover', ['$event']) ondragover(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    if (!isValidTarget(e.target)) {
+      return;
+    }
     e.target.classList.add('is-dragover');
   }
 
-  @HostListener('dragenter', ['$event']) ondragenter(e) {
+  @HostListener('dragenter', ['$event']) ondragenter(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    if (!isValidTarget(e.target)) {
+      return;
+    }
     e.target.classList.add('is-dragover');
   }
 
-  @HostListener('dragleave', ['$event']) ondragleave(e) {
+  @HostListener('dragleave', ['$event']) ondragleave(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    if (!isValidTarget(e.target)) {
+      return;
+    }
     e.target.classList.remove('is-dragover');
   }
 
-  @HostListener('drop', ['$event']) ondrop(e) {
+  @HostListener('drop', ['$event']) ondrop(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    if (!isValidTarget(e.target)) {
+      return;
+    }
     e.target.classList.remove('is-dragover');
-    this.import(e.dataTransfer.files);
+    if (!e.dataTransfer?.files) {
+      return;
+    }
+    this.import(Array.from(e.dataTransfer.files));
   }
 
   onFilesAdded() {
-    this.import(this.file.nativeElement.files);
+    if (!this.file?.nativeElement.files) {
+      return;
+    }
+    this.import(Array.from(this.file.nativeElement.files));
     this.file.nativeElement.value = '';
   }
 
@@ -99,7 +124,7 @@ export class ImportComponent {
   }
 
   onClick() {
-    this.file.nativeElement.click();
+    this.file?.nativeElement.click();
   }
 
 }

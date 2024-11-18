@@ -18,16 +18,16 @@ export class MonthReportComponent implements OnChanges {
   reportService = inject(ReportService);
 
 
-  @Input()
-  year: number;
+  @Input({ required: true })
+  year!: number;
 
-  @Input()
-  month: number;
+  @Input({ required: true })
+  month!: number;
 
   displayedColumns = ['date', 'steps', 'distance'];
   locationColumns = ['id', 'name', 'address'];
-  locations: MatTableDataSource<Location>;
-  days: MatTableDataSource<Day>;
+  locations!: MatTableDataSource<Location> | undefined;
+  days!: MatTableDataSource<Day> | undefined;
 
   constructor() {
     const waypointService = this.waypointService;

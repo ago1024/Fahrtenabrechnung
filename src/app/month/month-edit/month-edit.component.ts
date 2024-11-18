@@ -16,10 +16,10 @@ export class MonthEditComponent {
   cd = inject(ChangeDetectorRef);
 
 
-  private _year: number;
-  private _month: number;
+  private _year!: number;
+  private _month!: number;
 
-  private _days: number[];
+  private _days!: number[];
 
   private _selected = 1;
 

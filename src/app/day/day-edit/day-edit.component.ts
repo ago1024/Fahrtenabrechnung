@@ -30,16 +30,16 @@ export class DayEditComponent implements OnInit {
   dialog = inject(MatDialog);
 
 
-  @Input()
-  year: number;
+  @Input({ required: true })
+  year!: number;
 
-  @Input()
-  month: number;
+  @Input({ required: true })
+  month!: number;
 
-  @Input()
-  day: number;
+  @Input({ required: true })
+  day!: number;
 
-  locations: Location[];
+  locations!: Location[];
 
   get id(): string {
     return this.parent.makeId(this.day);
@@ -62,6 +62,9 @@ export class DayEditComponent implements OnInit {
       width: '400px'
     });
     dialogRef.afterClosed().subscribe(data => {
+      if (!data) {
+        return;
+      }
       const location = this.locationService.createLocation(data.name, data.address);
       this.waypointService.addWaypoint(this.id, location);
     });
@@ -73,8 +76,11 @@ export class DayEditComponent implements OnInit {
       data: { name, address },
     });
     dialogRef.afterClosed().subscribe(data => {
+      if (!data) {
+        return;
+      }
       const location = this.locationService.editLocation(id, data.name, data.address);
-      if (data.resetDistances) {
+      if (location && data.resetDistances) {
         this.locationService.resetDistances(location);
       }
     });

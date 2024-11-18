@@ -7,6 +7,10 @@ import { WaypointEntries } from './waypoint.service';
 
 export const SAVE_AS = new InjectionToken<(blob: Blob, filename: string) => void>('SaveAs', { factory: () => (blob, filename) => saveAs(blob, filename) });
 
+const VERIFY_KEY = 'Fahrtenaberechnung_Version';
+const VERIFY_DATA = 'v20180930';
+
+
 @Injectable()
 export class ExportService {
   private storageService = inject(StorageService);
@@ -14,13 +18,10 @@ export class ExportService {
   private localeId = inject(LOCALE_ID);
 
 
-  private VERIFY_KEY = 'Fahrtenaberechnung_Version';
-  private VERIFY_DATA = 'v20180930';
-
   public toBlob(): Blob {
     const data = {
       ...this.storageService.data,
-      Fahrtenaberechnung_Version: this.VERIFY_DATA,
+      Fahrtenaberechnung_Version: VERIFY_DATA,
     };
     const blob = new Blob(['\ufeff', JSON.stringify(data)], { type: 'application/json' });
     return blob;
@@ -34,6 +35,6 @@ export class ExportService {
   }
 
   public isValid(data: unknown): data is WaypointEntries {
-    return data != null && typeof data === 'object' && data[this.VERIFY_KEY] === this.VERIFY_DATA;
+    return data != null && typeof data === 'object' && VERIFY_KEY in data && data[VERIFY_KEY] === VERIFY_DATA;
   }
 }

@@ -12,14 +12,14 @@ import { MonthEditComponent } from '@app/month/month-edit/month-edit.component';
 export class DayDateComponent {
   private parent = inject(MonthEditComponent, { host: true });
 
-  @Input()
-  year: number;
+  @Input({ required: true })
+  year!: number;
 
-  @Input()
-  month: number;
+  @Input({ required: true })
+  month!: number;
 
-  @Input()
-  day: number;
+  @Input({ required: true })
+  day!: number;
 
   get id(): string {
     return this.parent.makeId(this.day);

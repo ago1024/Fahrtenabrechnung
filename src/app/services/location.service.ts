@@ -21,7 +21,7 @@ export interface Location {
 }
 
 interface DistanceReset {
-  resetDistances(location: Location);
+  resetDistances(location: Location): void;
 }
 
 class LocationImpl implements Location {
@@ -106,7 +106,7 @@ export class LocationService implements DistanceReset {
     return this._locations.values();
   }
 
-  getLocation(id: string): Location {
+  getLocation(id: string): Location | undefined {
     return this._locations.get(id);
   }
 
@@ -121,7 +121,7 @@ export class LocationService implements DistanceReset {
     return { id: location.id, name: location.name, address: location.address };
   }
 
-  editLocation(id: string, name: string, address: string): Location {
+  editLocation(id: string, name: string, address: string): Location | undefined {
     const location = this._locations.get(id);
     if (!location) {
       return;
@@ -161,7 +161,7 @@ export class LocationService implements DistanceReset {
     return this._distances.has(LocationService.key(from, to));
   }
 
-  getDistance(from: Location, to: Location): number {
+  getDistance(from: Location, to: Location): number | undefined {
     return this._distances.get(LocationService.key(from, to));
   }
 

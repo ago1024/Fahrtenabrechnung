@@ -57,22 +57,22 @@ export class DayViewComponent implements OnChanges, OnDestroy {
   mapsService = inject(MapsService);
   dialog = inject(MatDialog);
 
-  @Input()
-  year: number;
+  @Input({ required: true })
+  year!: number;
 
-  @Input()
-  month: number;
+  @Input({ required: true })
+  month!: number;
 
-  @Input()
-  day: number;
+  @Input({ required: true })
+  day!: number;
 
   get id(): string {
     return this.parent.makeId(this.day);
   }
 
-  waypoints: Location[];
-  steps: Step[];
-  totalDistance: number;
+  waypoints!: Location[];
+  steps!: Step[];
+  totalDistance: number | undefined;
 
   private ngUnsubscribe: Subject<void> = new Subject();
 

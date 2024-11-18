@@ -17,14 +17,14 @@ export class MonthLocationsComponent implements OnChanges {
   reportService = inject(ReportService);
 
 
-  @Input()
-  year: number;
+  @Input({ required: true })
+  year!: number;
 
-  @Input()
-  month: number;
+  @Input({ required: true})
+  month!: number;
 
   locationColumns = ['id', 'name', 'address'];
-  locations: MatTableDataSource<Location>;
+  locations!: MatTableDataSource<Location>;
 
   constructor() {
     const waypointService = this.waypointService;
